@@ -58,7 +58,7 @@ export interface UserValues {
   name: string
   email: string
   password: string
-  emailVerified?: Date
+  emailVerified?: boolean
   image?: string
 }
 

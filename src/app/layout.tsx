@@ -2,6 +2,7 @@ import "./globals.css"
 import type { Metadata } from "next"
 import { Raleway } from "next/font/google"
 import AuthProvider from "@/context/AuthProvider"
+import QueryProvider from "@/context/QueryProvider"
 import { Session } from "next-auth"
 
 const inter = Raleway({ subsets: ["latin"] })
@@ -21,7 +22,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <AuthProvider session={session}>
-        <body className={inter.className}>{children}</body>
+        <QueryProvider>
+          <body className={inter.className}>{children}</body>
+        </QueryProvider>
       </AuthProvider>
     </html>
   )
