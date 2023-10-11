@@ -42,6 +42,8 @@ export interface UserData {
 export interface EditUserProps {
   name: string
   email: string
+  oldEmail?: string
+  oldName?: string
 }
 
 export interface User {

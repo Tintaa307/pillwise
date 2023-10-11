@@ -4,6 +4,7 @@ import { Raleway } from "next/font/google"
 import AuthProvider from "@/context/AuthProvider"
 import QueryProvider from "@/context/QueryProvider"
 import { Session } from "next-auth"
+import Menu from "@/components/web/menu/Menu"
 
 const inter = Raleway({ subsets: ["latin"] })
 
@@ -23,7 +24,10 @@ export default function RootLayout({
     <html lang="en">
       <AuthProvider session={session}>
         <QueryProvider>
-          <body className={inter.className}>{children}</body>
+          <body className={inter.className}>
+            <Menu />
+            {children}
+          </body>
         </QueryProvider>
       </AuthProvider>
     </html>

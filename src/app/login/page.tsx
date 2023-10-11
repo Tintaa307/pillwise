@@ -3,14 +3,14 @@
 import React, { useState } from "react"
 import { Toaster, toast } from "react-hot-toast"
 import { Formik, Form, Field } from "formik"
-import { LoginValues } from "@/types"
+import { LoginValues } from "@/types/types"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { z } from "zod"
 import { AxiosError } from "axios"
 import { signIn, useSession } from "next-auth/react"
 import { statusAuth } from "@/objects/status"
-import Loader from "@/components/shared/Loader"
+import Loader from "@/components/web/shared/Loader"
 import { GoogleLogo } from "@/components/icons/Icons"
 
 const Login = () => {
@@ -158,7 +158,7 @@ const Login = () => {
                   </div>
                   <article className="w-full flex text-center justify-center items-center mt-10">
                     <div
-                      className="w-80 h-[50px] bg-[#f26161] rounded-sm flex items-center justify-center"
+                      className="w-4/5 h-[50px] bg-[#f26161] rounded-lg flex items-center justify-center"
                       onClick={loginWithGoogle}
                     >
                       <GoogleLogo />

@@ -1,4 +1,4 @@
-import { StatusProps } from "@/types"
+import { StatusProps } from "@/types/types"
 
 export const statusAuth = Object.freeze({
   NOT_AUTH: "unauthenticated",

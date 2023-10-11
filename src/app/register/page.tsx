@@ -2,7 +2,7 @@
 
 import React, { useState } from "react"
 import { Formik, Form, Field } from "formik"
-import { UserValues } from "@/types"
+import { UserValues } from "@/types/types"
 import { useRouter } from "next/navigation"
 import { Toaster, toast } from "react-hot-toast"
 import { z } from "zod"
