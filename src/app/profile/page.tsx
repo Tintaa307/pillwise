@@ -49,29 +49,31 @@ const Profile = () => {
       {status === LOADING ? (
         <Loader />
       ) : (
-        <main className="w-full h-screen bg-indigo-600">
-          <div className="w-full h-full flex items-center justify-center flex-col gap-20">
-            <picture className="w-48 h-48 rounded-full bg-white border-[2px] border-black">
-              <div className="w-full h-full flex items-center justify-center">
-                <IconUserFilled
-                  width={110}
-                  height={110}
-                  className={[
-                    "ri-user-3-fill",
-                    "text-black text-8xl font-bold",
-                  ].join(" ")}
-                />
-              </div>
-              <div className="w-10 h-10 bg-white border-2 border-black rounded-full flex items-center justify-center float-right -mt-11">
-                <IconPencilMinus
-                  className={["ri-edit-2-line", "text-black text-2xl"].join(
-                    " "
-                  )}
-                />
+        <main className="w-full h-screen bg-primary_blue">
+          <div className="w-full h-full flex items-center justify-center flex-col">
+            <picture className="w-full h-[35%] flex items-center justify-center">
+              <div className="relative w-48 h-48 rounded-full bg-white border-[2px] border-black">
+                <div className="w-full h-full flex items-center justify-center">
+                  <IconUserFilled
+                    width={110}
+                    height={110}
+                    className={[
+                      "ri-user-3-fill",
+                      "text-black text-8xl font-bold",
+                    ].join(" ")}
+                  />
+                </div>
+                <div className="w-10 h-10 bg-white border-2 border-black rounded-full flex items-center justify-center float-right -mt-11">
+                  <IconPencilMinus
+                    className={["ri-edit-2-line", "text-black text-2xl"].join(
+                      " "
+                    )}
+                  />
+                </div>
               </div>
             </picture>
-            <section className="w-full h-max rounded-t-[40px] bg-white flex items-center justify-center ">
-              <div className="w-full h-full flex items-center justify-center mt-14">
+            <section className="w-full h-[65%] rounded-t-[40px] bg-white flex items-center justify-center ">
+              <div className="w-full h-full flex items-center justify-center">
                 <Formik
                   initialValues={{
                     name: "",
