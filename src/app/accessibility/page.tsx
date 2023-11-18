@@ -45,7 +45,11 @@ const Accessibility = () => {
   return (
     <main className="w-full h-screen flex items-center justify-center flex-col bg-primary_blue">
       <div className="absolute top-3 left-3">
-        <IconArrowBack className="text-white" size={40} />
+        <IconArrowBack
+          onClick={() => router.push("/")}
+          className="text-white"
+          size={40}
+        />
       </div>
       <div className="w-full h-[25%] flex items-center justify-center">
         <h1 className="text-white font-bold text-4xl">Accesibilidad</h1>
