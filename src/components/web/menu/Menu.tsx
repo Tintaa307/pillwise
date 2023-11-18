@@ -114,11 +114,17 @@ const Menu = () => {
       )}
     >
       <div className="absolute w-full h-max flex items-center justify-center">
-        <div className="relative -top-10 w-14 h-14 bg-white rounded-full flex items-center justify-center">
+        <div className="relative z-40 -top-10 w-14 h-14 bg-white rounded-full flex items-center justify-center">
           {open ? (
-            <IconChevronDown onClick={() => setOpen(true)} />
+            <IconChevronDown
+              className="relative z-40"
+              onClick={() => setOpen(true)}
+            />
           ) : (
-            <IconChevronUp onClick={() => setOpen(false)} />
+            <IconChevronUp
+              className="relative z-40"
+              onClick={() => setOpen(false)}
+            />
           )}
         </div>
       </div>
