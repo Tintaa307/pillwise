@@ -37,6 +37,7 @@ const Contact = () => {
           </span>
           <small className="text-black text-lg font-semibold">Telefono</small>
         </div>
+
         <div className="w-[118px] h-[118px] bg-white rounded-sm flex items-center justify-center flex-col gap-2">
           <span className="w-16 h-16 bg-primary_blue rounded-full flex items-center justify-center">
             <IconMessage className="text-white font-bold" size={30} />
@@ -44,6 +45,7 @@ const Contact = () => {
           <small className="text-black text-lg font-semibold">Whatsapp</small>
         </div>
       </div>
+
       <div className="w-full h-[70%] flex items-center justify-start flex-col bg-white rounded-t-3xl">
         <div className="w-full flex items-center justify-center h-max mt-8">
           <h2 className="text-black text-3xl font-bold">Contáctanos</h2>
