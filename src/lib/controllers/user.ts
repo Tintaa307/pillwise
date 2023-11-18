@@ -2,7 +2,10 @@ import { EditUserProps, UserValues } from "@/types/types"
 import axios from "axios"
 
 const userAPI = axios.create({
-  baseURL: "http://localhost:3000/api/",
+  baseURL:
+    process.env.NODE_ENV === "production"
+      ? "https://pillwise-medicine.vercel.app/api/pills"
+      : "http://localhost:3000/api/",
 })
 
 export const createUser = async (user: UserValues) => {

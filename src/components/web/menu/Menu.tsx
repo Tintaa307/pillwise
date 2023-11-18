@@ -3,18 +3,21 @@
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import React, { MouseEvent, useState } from "react"
+import React, { useState } from "react"
 import {
   IconRadar2,
   IconCalendarDue,
   IconSmartHome,
   IconMessage,
   IconUser,
+  IconChevronDown,
+  IconChevronUp,
 } from "@tabler/icons-react"
 
 const Menu = () => {
   const [selected, setSelected] = useState("/")
   const pathname = usePathname()
+  const [open, setOpen] = useState(true)
 
   // const handleSelected = (e: MouseEvent<HTMLLIElement>) => {
   //   const clicked = e.target as HTMLLIElement
@@ -101,7 +104,24 @@ const Menu = () => {
   ]
 
   return (
-    <header className="fixed bottom-0 left-0 w-full h-24 z-40 bg-white shadow-[0_0_10px_#00000040]">
+    <header
+      className={cn(
+        "fixed bottom-0 left-0 w-full h-24 z-40 bg-white shadow-[0_0_10px_#00000040]",
+        {
+          "translate-y-0 transition-all duration-200": open,
+          "translate-y-full transition-all duration-200": !open,
+        }
+      )}
+    >
+      <div className="absolute w-full h-max flex items-center justify-center">
+        <div className="relative -top-10 w-14 h-14 bg-white rounded-full flex items-center justify-center">
+          {open ? (
+            <IconChevronDown onClick={() => setOpen(true)} />
+          ) : (
+            <IconChevronUp onClick={() => setOpen(false)} />
+          )}
+        </div>
+      </div>
       <nav className="w-full h-full flex items-center justify-center">
         <ul className="w-full flex flex-row justify-between px-5 items-center">
           {navIcons.map((icon, index) => (
