@@ -2,7 +2,6 @@
 
 import React from "react"
 import {
-  IconArrowBack,
   IconWorld,
   IconBulb,
   IconZoomScan,
@@ -11,6 +10,7 @@ import {
   IconChevronRight,
 } from "@tabler/icons-react"
 import { useRouter } from "next/navigation"
+import ArrowBackButton from "@/components/web/arrow-back-button"
 
 const Accessibility = () => {
   const router = useRouter()
@@ -44,13 +44,7 @@ const Accessibility = () => {
 
   return (
     <main className="w-full h-screen flex items-center justify-center flex-col bg-primary_blue">
-      <div className="absolute top-3 left-3">
-        <IconArrowBack
-          onClick={() => router.push("/")}
-          className="text-white"
-          size={40}
-        />
-      </div>
+      <ArrowBackButton route="/" />
       <div className="w-full h-[25%] flex items-center justify-center">
         <h1 className="text-white font-bold text-4xl">Accesibilidad</h1>
       </div>

@@ -5,6 +5,7 @@ import AuthProvider from "@/context/AuthProvider"
 import QueryProvider from "@/context/QueryProvider"
 import { Session } from "next-auth"
 import Menu from "@/components/web/menu/Menu"
+import AccesibilityComponent from "@/context/AccesibilityComponent"
 
 const inter = Raleway({ subsets: ["latin"] })
 
@@ -24,10 +25,12 @@ export default function RootLayout({
     <html lang="en">
       <AuthProvider session={session}>
         <QueryProvider>
-          <body className={inter.className}>
-            <Menu />
-            {children}
-          </body>
+          <AccesibilityComponent>
+            <body className={inter.className}>
+              <Menu />
+              {children}
+            </body>
+          </AccesibilityComponent>
         </QueryProvider>
       </AuthProvider>
     </html>

@@ -1,5 +1,7 @@
 import Image from "next/image"
-import React, { useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
+import SaveButton from "../save-button"
+import { AccesibilityContext } from "@/context/AccesibilityContext"
 
 const Language = () => {
   const [actualLang, setActualLang] = useState("es")
@@ -25,6 +27,12 @@ const Language = () => {
       lang: "ita",
     },
   ]
+  const { handleLanguage } = useContext(AccesibilityContext)
+
+  useEffect(() => {
+    handleLanguage(actualLang)
+  }, [actualLang])
+
   return (
     <section className="w-full h-full flex items-center justify-start flex-col gap-12">
       <div className="w-full h-max flex items-center justify-center text-center mt-8">
@@ -53,6 +61,7 @@ const Language = () => {
           </picture>
         ))}
       </div>
+      <SaveButton margin="mt-0" />
     </section>
   )
 }

@@ -1,17 +1,15 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
-import { IconArrowBack } from "@tabler/icons-react"
 import Language from "@/components/web/language/Language"
 import Animations from "@/components/web/animations/Animations"
 import Contrast from "@/components/web/contrast/Contrast"
 import FontSize from "@/components/web/font-size/FontSize"
 import TextToSpeech from "@/components/web/text-to-speech/TextToSpeech"
-import { useRouter } from "next/navigation"
+import ArrowBackButton from "@/components/web/arrow-back-button"
 
 const Config = ({ params }: { params: { slug: string } }) => {
   const [renderElement, setRenderElement] = useState<string>()
-  const router = useRouter()
 
   useEffect(() => {
     setRenderElement(params.slug)
@@ -20,13 +18,7 @@ const Config = ({ params }: { params: { slug: string } }) => {
   const title = params.slug.charAt(0).toLocaleUpperCase()
   return (
     <main className="w-full h-screen flex items-center justify-center flex-col bg-primary_blue">
-      <div className="absolute top-3 left-3">
-        <IconArrowBack
-          onClick={() => router.push("/accessibility")}
-          className="text-white"
-          size={40}
-        />
-      </div>
+      <ArrowBackButton route="/accessibility" />
       <div className="w-full h-[25%] flex items-center justify-center">
         <h1 className="text-white text-3xl font-semibold">
           {title + params.slug.slice(1, params.slug.length)}
