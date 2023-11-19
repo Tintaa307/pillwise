@@ -10,8 +10,6 @@ import {
   IconSmartHome,
   IconMessage,
   IconUser,
-  IconChevronDown,
-  IconChevronUp,
 } from "@tabler/icons-react"
 
 const Menu = () => {
@@ -42,7 +40,7 @@ const Menu = () => {
     },
     {
       id: "2",
-      name: "Calendar",
+      name: "Calendario",
       icon: (
         <IconCalendarDue
           id="2"
@@ -57,7 +55,7 @@ const Menu = () => {
     },
     {
       id: "3",
-      name: "Home",
+      name: "Principal",
       icon: (
         <IconSmartHome
           id="3"
@@ -87,7 +85,7 @@ const Menu = () => {
     },
     {
       id: "5",
-      name: "Profile",
+      name: "Perfil",
       icon: (
         <IconUser
           id="5"

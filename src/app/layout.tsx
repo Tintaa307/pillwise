@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   title: "Pillwise",
   description: "The next medicine reminder app",
   icons: {
-    icon: "/icons/icon-512x512.png",
+    icon: "/logo-pillwise.png",
   },
   viewport: "width=device-width, initial-scale=1.0",
   manifest: "/manifest.json",
