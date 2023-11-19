@@ -67,7 +67,7 @@ const Sidebar = ({ isOpen, setIsOpen }: SidebarProps) => {
         />
       </nav>
       <div className="w-full h-full mt-8">
-        <div className="w-[90%] h-max border-t-0 border-l- border-r-0 border-[1px] border-b-black mx-3">
+        <div className="w-[90%] h-max border-t-0 border-l-0 border-r-0 border-[1px] border-b-black mx-3">
           <h2 className="text-black text-3xl font-semibold ml-2 my-4">
             Indice
           </h2>

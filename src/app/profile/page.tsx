@@ -53,15 +53,8 @@ const Profile = () => {
           <div className="w-full h-full flex items-center justify-center flex-col">
             <picture className="w-full h-[35%] flex items-center justify-center">
               <div className="relative w-48 h-48 rounded-full bg-white border-[2px] border-black">
-                <div className="w-full h-full flex items-center justify-center">
-                  <IconUserFilled
-                    width={110}
-                    height={110}
-                    className={[
-                      "ri-user-3-fill",
-                      "text-black text-8xl font-bold",
-                    ].join(" ")}
-                  />
+                <div className="w-full h-full flex items-center justify-center bg-[#707070]/30 rounded-full">
+                  <span className="text-black/80 text-7xl font-bold">P</span>
                 </div>
                 <div className="w-10 h-10 bg-white border-2 border-black rounded-full flex items-center justify-center float-right -mt-11">
                   <IconPencilMinus
@@ -97,7 +90,7 @@ const Profile = () => {
                           name="name"
                           type="text"
                           placeholder={
-                            isEditing ? "Write your new full name" : ""
+                            isEditing ? "Nuevo nombre completo..." : ""
                           }
                           disabled={isEditing ? "" : "disabled"}
                           value={isEditing ? values.name : session?.user?.name}
@@ -116,7 +109,7 @@ const Profile = () => {
                         <Field
                           name="email"
                           type="text"
-                          placeholder={isEditing ? "Write your new email" : ""}
+                          placeholder={isEditing ? "Nuevo email..." : ""}
                           value={
                             isEditing ? values.email : session?.user?.email
                           }
