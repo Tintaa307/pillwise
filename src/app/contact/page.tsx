@@ -62,7 +62,7 @@ const Contact = () => {
         <form
           onSubmit={handleSubmit}
           autoComplete="off"
-          className="w-full h-max flex items-center justify-center flex-col gap-6 mt-6 mb-14"
+          className="w-full h-max flex items-center justify-center flex-col gap-6 mt-6 mb-16"
         >
           <div className="w-full h-max flex items-center justify-start flex-col gap-1">
             <div className="w-full h-max flex items-start justify-start">
@@ -113,7 +113,7 @@ const Contact = () => {
               rows={10}
             ></textarea>
           </div>
-          <button className="w-[85%] h-14 rounded-md outline-none border-none bg-primary_blue text-white text-lg font-normal mb-14">
+          <button className="w-[85%] h-14 rounded-md outline-none border-none bg-primary_blue text-white text-lg font-normal mb-16">
             Enviar
           </button>
         </form>

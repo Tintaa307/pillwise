@@ -50,7 +50,7 @@ const Accessibility = () => {
       </div>
       <section className="w-full h-[75%] flex items-center justify-start bg-white rounded-t-3xl">
         <div className="w-full h-full">
-          <ul className="w-full h-max flex items-center justify-center flex-col mt-16">
+          <ul className="w-full h-max flex items-center justify-center flex-col mt-8">
             {arrItems.map((item, index) => (
               <li
                 onClick={() => router.push(item.path)}
