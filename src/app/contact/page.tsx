@@ -43,7 +43,7 @@ const Contact = () => {
         <Link
           target="_blank"
           href={
-            "https://api.whatsapp.com/send?phone=+5491144489123&text=Hola que tal?, necesito ayuda con pillwise."
+            "https://api.whatsapp.com/send?phone=+5491144489123&text=Necesito ayuda con pillwise."
           }
         >
           <div className="w-[118px] h-[118px] bg-white rounded-sm flex items-center justify-center flex-col gap-2">
