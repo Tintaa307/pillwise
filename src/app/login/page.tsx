@@ -117,7 +117,7 @@ const Login = () => {
                       type="email"
                       label="Email"
                       placeholder="Email..."
-                      className="w-80 h-12 rounded-md border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:border-transparent text-lg font-semibold px-2"
+                      className="w-80 h-12 rounded-md border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary_blue text-lg font-semibold px-2"
                       value={values.email}
                     />
                     {errors.email && touched.email ? (
@@ -133,7 +133,7 @@ const Login = () => {
                       label="Password"
                       type="password"
                       placeholder="Contraseña..."
-                      className="w-80 h-12 rounded-md border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent text-lg font-semibold px-2"
+                      className="w-80 h-12 rounded-md border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary_blue text-lg font-semibold px-2"
                       value={values.password}
                     />
                     {errors.password && touched.password ? (
@@ -145,7 +145,7 @@ const Login = () => {
                   <h6 className="text-center text-black mt-7 font-bold text-sm">
                     ¿No tienes una cuenta aún? Registrate{" "}
                     <Link
-                      className="text-indigo-700 underline"
+                      className="text-primary_blue underline"
                       href={"/register"}
                     >
                       aquí
@@ -165,7 +165,7 @@ const Login = () => {
                     </div>
                   </article>
                   <button
-                    className="w-4/5 h-12 my-8 bg-[#553AFD] rounded-lg text-white font-semibold text-[24px] cursor-pointer"
+                    className="w-4/5 h-12 my-8 bg-primary_blue rounded-lg text-white font-semibold text-[24px] cursor-pointer"
                     type="submit"
                   >
                     Continuar

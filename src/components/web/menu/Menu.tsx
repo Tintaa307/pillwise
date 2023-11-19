@@ -84,7 +84,7 @@ const Menu = () => {
           })}
         />
       ),
-      url: "/",
+      url: "https://pillwise-chat.vercel.app/",
     },
     {
       id: "5",
@@ -104,50 +104,54 @@ const Menu = () => {
   ]
 
   return (
-    <header
-      className={cn(
-        "fixed bottom-0 left-0 w-full h-24 z-40 bg-white shadow-[0_0_10px_#00000040]",
-        {
-          "translate-y-0 transition-all duration-200": open,
-          "translate-y-full transition-all duration-200": !open,
-        }
-      )}
-    >
-      <div className="absolute w-full h-max flex items-center justify-center">
-        <div
-          onClick={() => setOpen(!open)}
+    <>
+      {pathname !== "/login" && pathname !== "register" ? (
+        <header
           className={cn(
-            "relative z-40 -top-10 w-14 h-14 bg-white rounded-full flex items-center justify-center",
+            "fixed bottom-0 left-0 w-full h-24 z-40 bg-white shadow-[0_0_10px_#00000040]",
             {
-              "-top-6": open,
+              "translate-y-0 transition-all duration-200": open,
+              "translate-y-full transition-all duration-200": !open,
             }
           )}
         >
-          {open ? (
-            <IconChevronDown
-              className="relative z-40"
-              onClick={() => setOpen(true)}
-            />
-          ) : (
-            <IconChevronUp
-              className="relative z-40"
-              onClick={() => setOpen(false)}
-            />
-          )}
-        </div>
-      </div>
-      <nav className="w-full h-full flex items-center justify-center">
-        <ul className="w-full flex flex-row justify-between px-5 items-center">
-          {navIcons.map((icon, index) => (
-            <div key={index}>
-              <li onClick={() => setSelected(icon.url)} className="">
-                <Link href={icon.url}>{icon.icon}</Link>
-              </li>
+          <div className="absolute w-full h-max flex items-center justify-center">
+            <div
+              onClick={() => setOpen(!open)}
+              className={cn(
+                "relative z-40 -top-10 w-14 h-14 bg-white rounded-full flex items-center justify-center",
+                {
+                  "-top-6": open,
+                }
+              )}
+            >
+              {open ? (
+                <IconChevronDown
+                  className="relative z-40"
+                  onClick={() => setOpen(true)}
+                />
+              ) : (
+                <IconChevronUp
+                  className="relative z-40"
+                  onClick={() => setOpen(false)}
+                />
+              )}
             </div>
-          ))}
-        </ul>
-      </nav>
-    </header>
+          </div>
+          <nav className="w-full h-full flex items-center justify-center">
+            <ul className="w-full flex flex-row justify-between px-5 items-center">
+              {navIcons.map((icon, index) => (
+                <div key={index}>
+                  <li onClick={() => setSelected(icon.url)} className="">
+                    <Link href={icon.url}>{icon.icon}</Link>
+                  </li>
+                </div>
+              ))}
+            </ul>
+          </nav>
+        </header>
+      ) : null}
+    </>
   )
 }
 

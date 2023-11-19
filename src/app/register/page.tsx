@@ -71,12 +71,12 @@ const Register = () => {
     <main className="absolute w-full h-full top-0 left-0">
       <Toaster />
       <div className="absolute top-6 right-7">
-        <strong className="text-4xl text-[#553AFD]">pw</strong>
+        <strong className="text-4xl text-primary_blue">pw</strong>
       </div>
       <div className="w-full flex justify-start mt-40">
         <h1 className="text-3xl font-extrabold ml-12">
           Crea tu cuenta <br /> de{" "}
-          <span className="text-[#553AFD]">Pillwise</span>
+          <span className="text-primary_blue">Pillwise</span>
         </h1>
       </div>
       <div className="mb-10">
@@ -102,7 +102,7 @@ const Register = () => {
                   name="name"
                   type="text"
                   placeholder="Nombre completo..."
-                  className="w-80 h-12 rounded-md border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:border-transparent text-lg font-semibold px-2"
+                  className="w-80 h-12 rounded-md border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary_blue text-lg font-semibold px-2"
                   value={values.name}
                 />
                 {errors.name && touched.name ? (
@@ -117,7 +117,7 @@ const Register = () => {
                   name="email"
                   type="email"
                   placeholder="Email..."
-                  className="w-80 h-12 rounded-md border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:border-transparent text-lg font-semibold px-2"
+                  className="w-80 h-12 rounded-md border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary_blue text-lg font-semibold px-2"
                   value={values.email}
                 />
                 {errors.email && touched.email ? (
@@ -132,7 +132,7 @@ const Register = () => {
                   name="password"
                   type="password"
                   placeholder="Contraseña..."
-                  className="w-80 h-12 rounded-md border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent text-lg font-semibold px-2"
+                  className="w-80 h-12 rounded-md border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary_blue text-lg font-semibold px-2"
                   value={values.password}
                 />
                 {errors.password && touched.password ? (
@@ -149,11 +149,11 @@ const Register = () => {
                   value={confirmPassword}
                   onChange={(e: any) => setConfirmPassword(e.target.value)}
                   placeholder="Confirma contraseña..."
-                  className="w-80 h-12 rounded-md border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent text-lg font-semibold px-2"
+                  className="w-80 h-12 rounded-md border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary_blue text-lg font-semibold px-2"
                 />
               </div>
               <button
-                className="absolute bottom-20 w-4/5 h-12 bg-[#553AFD] rounded-lg text-white font-semibold text-[24px] cursor-pointer"
+                className="absolute bottom-20 w-4/5 h-12 bg-primary_blue rounded-lg text-white font-semibold text-[24px] cursor-pointer"
                 type="submit"
               >
                 Registrate
@@ -163,7 +163,7 @@ const Register = () => {
         </Formik>
         <h6 className="text-center text-black mt-7 font-bold text-sm">
           ¿Ya tienes una cuenta? Inicia sesion{" "}
-          <Link className="text-indigo-700 underline" href={"/login"}>
+          <Link className="text-primary_blue underline" href={"/login"}>
             aquí
           </Link>
         </h6>
