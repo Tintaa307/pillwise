@@ -105,13 +105,13 @@ const Menu = () => {
       {pathname !== "/login" && pathname !== "register" ? (
         <header
           className={cn(
-            "fixed bottom-0 left-0 w-full h-16 z-40 bg-white shadow-[0_0_10px_#00000040]"
+            "fixed bottom-0 left-0 w-full h-16 z-40 bg-white shadow-[0_0_10px_#00000040] flex items-center justify-center"
           )}
         >
           <nav className="w-full h-full flex items-center justify-center">
-            <ul className="w-full flex flex-row justify-between px-5 items-center">
+            <ul className="w-full flex flex-row justify-evenly items-center gap-3">
               {navIcons.map((icon, index) => (
-                <div key={index}>
+                <div className="w-full h-full" key={index}>
                   <li
                     onClick={() => setSelected(icon.url)}
                     className="flex justify-center items-center gap-1 flex-col"
