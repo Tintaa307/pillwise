@@ -74,7 +74,7 @@ const Contact = () => {
               </label>
             </div>
             <input
-              className="w-[85%] h-14 border-none rounded-md outline-none shadow-[2px_4px_8px_#707070] text-black font-semibold px-4 border-[1px] border-[#707070]"
+              className="w-[85%] h-14 rounded-md outline-none shadow-[2px_4px_8px_#707070] text-black font-semibold px-4 border-[1px] border-[#707070]"
               placeholder="Escriba su nombre"
               name="name"
               type="text"
@@ -90,7 +90,7 @@ const Contact = () => {
               </label>
             </div>
             <input
-              className="w-[85%] h-14 border-none rounded-md outline-none shadow-[2px_4px_8px_#707070] text-black font-semibold px-4 border-[1px] border-[#707070]"
+              className="w-[85%] h-14 rounded-md outline-none shadow-[2px_4px_8px_#707070] text-black font-semibold px-4 border-[1px] border-[#707070]"
               placeholder="Escriba su email"
               name="email"
               type="email"
@@ -106,7 +106,7 @@ const Contact = () => {
               </label>
             </div>
             <textarea
-              className="w-[85%] h-24 border-none rounded-md outline-none shadow-[2px_4px_8px_#707070] text-black font-semibold px-4 py-2 border-[1px] border-[#707070]"
+              className="w-[85%] h-24 rounded-md outline-none shadow-[2px_4px_8px_#707070] text-black font-semibold px-4 py-2 border-[1px] border-[#707070]"
               placeholder="Escriba su mensaje"
               name="message"
               cols={30}
