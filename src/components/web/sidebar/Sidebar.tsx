@@ -95,7 +95,7 @@ const Sidebar = ({ isOpen, setIsOpen }: SidebarProps) => {
               className="absolute bottom-10 w-4/5 h-12 rounded-lg bg-[#2A0E8F] flex items-center justify-center text-white font-semibold text-lg ml-7"
               onClick={() => signOut({ callbackUrl: "/register" })}
             >
-              signOut
+              Cerrar sesión
             </button>
           </ul>
         </div>
