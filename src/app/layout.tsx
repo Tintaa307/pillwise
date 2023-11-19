@@ -12,6 +12,9 @@ const inter = Raleway({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "Pillwise",
   description: "The next medicine reminder app",
+  icons: {
+    icon: "/logo-pillwise.png",
+  },
 }
 
 export default function RootLayout({

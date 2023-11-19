@@ -4,6 +4,8 @@ import React from "react"
 import { IconPhone, IconMessage } from "@tabler/icons-react"
 import ArrowBackButton from "@/components/web/arrow-back-button"
 import toast, { Toaster } from "react-hot-toast"
+import { redirect } from "next/navigation"
+import Link from "next/link"
 
 type MessageProps = {
   name: string
@@ -38,12 +40,19 @@ const Contact = () => {
           <small className="text-black text-lg font-semibold">Telefono</small>
         </div>
 
-        <div className="w-[118px] h-[118px] bg-white rounded-sm flex items-center justify-center flex-col gap-2">
-          <span className="w-16 h-16 bg-primary_blue rounded-full flex items-center justify-center">
-            <IconMessage className="text-white font-bold" size={30} />
-          </span>
-          <small className="text-black text-lg font-semibold">Whatsapp</small>
-        </div>
+        <Link
+          target="_blank"
+          href={
+            "https://api.whatsapp.com/send?phone=+5491144489123&text=Hello, more information!"
+          }
+        >
+          <div className="w-[118px] h-[118px] bg-white rounded-sm flex items-center justify-center flex-col gap-2">
+            <span className="w-16 h-16 bg-primary_blue rounded-full flex items-center justify-center">
+              <IconMessage className="text-white font-bold" size={30} />
+            </span>
+            <small className="text-black text-lg font-semibold">Whatsapp</small>
+          </div>
+        </Link>
       </div>
 
       <div className="w-full h-[70%] flex items-center justify-start flex-col bg-white rounded-t-3xl">
@@ -56,8 +65,11 @@ const Contact = () => {
           className="w-full h-max flex items-center justify-center flex-col gap-6 mt-8"
         >
           <div className="w-full h-max flex items-center justify-start flex-col gap-1">
-            <div className="w-full h-max flex items-start justify-start ml-16">
-              <label className="text-black font-bold text-lg" htmlFor="name">
+            <div className="w-full h-max flex items-start justify-start">
+              <label
+                className="text-black font-bold text-lg ml-8"
+                htmlFor="name"
+              >
                 Nombre*
               </label>
             </div>
@@ -69,8 +81,11 @@ const Contact = () => {
             />
           </div>
           <div className="w-full h-max flex items-center justify-start flex-col gap-1">
-            <div className="w-full h-max flex items-start justify-start ml-16">
-              <label className="text-black font-bold text-lg" htmlFor="email">
+            <div className="w-full h-max flex items-start justify-start">
+              <label
+                className="text-black font-bold text-lg ml-8"
+                htmlFor="email"
+              >
                 Email*
               </label>
             </div>
@@ -82,8 +97,11 @@ const Contact = () => {
             />
           </div>
           <div className="w-full h-max flex items-center justify-start flex-col gap-1">
-            <div className="w-full h-max flex items-start justify-start ml-16">
-              <label className="text-black font-bold text-lg" htmlFor="message">
+            <div className="w-full h-max flex items-start justify-start">
+              <label
+                className="text-black font-bold text-lg ml-8"
+                htmlFor="message"
+              >
                 Mensaje*
               </label>
             </div>
