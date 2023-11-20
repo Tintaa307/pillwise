@@ -22,26 +22,14 @@ const Login = () => {
   async function loginWithGoogle() {
     setIsLoading(true)
     try {
-      await signIn("google", {
-        redirect: false,
+      await signIn("google").then((response) => {
+        if (response?.error) {
+          toast.error(response?.error)
+        } else {
+          toast.success("Te has logueado exitosamente!")
+          router.push("/")
+        }
       })
-        .then((response) => {
-          console.log(response)
-          if (response?.error) {
-            console.log("error: ", response?.error)
-            toast.error("Algo salio mal")
-          } else {
-            toast.success("Te has logueado correctamente")
-            router.push("/")
-          }
-          if (response?.ok) {
-            router.push("/")
-          }
-        })
-        .catch((error) => {
-          console.log("error: ", error)
-          toast.error("Algo salio mal")
-        })
     } catch (error) {
       toast.error("Algo salio mal")
     } finally {
