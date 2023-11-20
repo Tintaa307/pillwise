@@ -6,6 +6,7 @@ import { MapContainer, TileLayer } from "react-leaflet"
 import "leaflet/dist/leaflet.css"
 
 const Gps = () => {
+  if (typeof window === "undefined") return null
   return (
     <main className="w-full h-screen flex items-center justify-center">
       <div className="w-full h-full flex items-center justify-start flex-col gap-12">
