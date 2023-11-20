@@ -83,8 +83,8 @@ const Profile = () => {
                       className="w-full h-full flex items-center justify-center flex-col"
                     >
                       <div className="w-full h-max flex flex-col my-5">
-                        <label className="text-black ml-8">
-                          Nombre completo
+                        <label className="text-black ml-8 font-semibold text-lg">
+                          Nombre completo*
                         </label>
                         <Field
                           name="name"
@@ -103,8 +103,8 @@ const Profile = () => {
                         ) : null}
                       </div>
                       <div className="w-full h-max flex flex-col my-5">
-                        <label className="text-black ml-8">
-                          Correo electronico
+                        <label className="text-black ml-8 font-semibold text-lg">
+                          Correo electronico*
                         </label>
                         <Field
                           name="email"
@@ -125,7 +125,7 @@ const Profile = () => {
                       <div className="w-full flex items-center justify-center flex-row gap-6">
                         <div
                           onClick={() => setIsIsEditing(!isEditing)}
-                          className="w-[45%] h-12 rounded-lg bg-indigo-600 text-white text-xl font-semibold my-12 -mt-1 flex items-center justify-center"
+                          className="w-[45%] h-12 rounded-lg bg-primary_blue text-white text-xl font-semibold my-12 -mt-1 flex items-center justify-center"
                         >
                           {isEditing ? (
                             <span>Volver</span>
@@ -136,7 +136,7 @@ const Profile = () => {
                         {isEditing ? (
                           <button
                             type="submit"
-                            className="w-[45%] h-12 rounded-lg bg-indigo-600 text-white text-xl font-semibold my-12 -mt-1"
+                            className="w-[45%] h-12 rounded-lg bg-primary_blue text-white text-xl font-semibold my-12 -mt-1"
                           >
                             Enviar
                           </button>
