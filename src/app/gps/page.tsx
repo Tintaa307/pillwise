@@ -1,5 +1,9 @@
+"use client"
+
 import React from "react"
 import { IconReload, IconMusic } from "@tabler/icons-react"
+import { MapContainer, TileLayer } from "react-leaflet"
+import "leaflet/dist/leaflet.css"
 
 const Gps = () => {
   return (
@@ -10,7 +14,19 @@ const Gps = () => {
             Busca tu pastillero
           </h1>
         </div>
-        <section className="w-[90%] h-[40%] border-[1.5px] border-black rounded-sm"></section>
+        <section className="relative w-[90%] h-[40%] border-[1.5px] border-black rounded-sm">
+          <MapContainer
+            className="w-full h-full"
+            center={[51.505, -0.09]}
+            zoom={13}
+            scrollWheelZoom={false}
+          >
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+          </MapContainer>
+        </section>
         <div className="w-full h-max flex items-center justify-center flex-col gap-4">
           <div>
             <button className="w-[350px] h-[50px] bg-primary_blue text-white text-lg font-medium rounded-xl flex items-center justify-start">
