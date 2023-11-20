@@ -17,7 +17,7 @@ const Gps = () => {
               </h1>
             </div>
             <section className="relative w-[90%] h-[40%] border-[1.5px] border-black rounded-sm">
-              <MapContainer
+              {/* <MapContainer
                 className="w-full h-full"
                 center={[51.505, -0.09]}
                 zoom={13}
@@ -27,7 +27,7 @@ const Gps = () => {
                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-              </MapContainer>
+              </MapContainer> */}
             </section>
             <div className="w-full h-max flex items-center justify-center flex-col gap-4">
               <div>
