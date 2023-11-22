@@ -61,7 +61,7 @@ const Language = () => {
           </picture>
         ))}
       </div>
-      <SaveButton margin="mt-0" />
+      <SaveButton margin="mt-0 my-12" />
     </section>
   )
 }

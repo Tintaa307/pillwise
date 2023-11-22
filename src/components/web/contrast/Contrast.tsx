@@ -32,7 +32,7 @@ const Contrast = () => {
         description="Reduce la intensidad del brillo de los colores"
       />
 
-      <SaveButton margin="mt-12" />
+      <SaveButton margin="my-12" />
     </section>
   )
 }

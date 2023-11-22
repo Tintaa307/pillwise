@@ -19,12 +19,12 @@ const Config = ({ params }: { params: { slug: string } }) => {
   return (
     <main className="w-full h-screen flex items-center justify-center flex-col bg-primary_blue">
       <ArrowBackButton route="/accessibility" />
-      <div className="w-full h-[25%] flex items-center justify-center">
+      <div className="w-full h-[22%] flex items-center justify-center">
         <h1 className="text-white text-3xl font-semibold">
           {title + params.slug.slice(1, params.slug.length)}
         </h1>
       </div>
-      <section className="w-full h-[75%] flex items-center justify-center bg-white rounded-3xl">
+      <section className="w-full h-[78%] flex items-center justify-center bg-white rounded-3xl">
         {renderElement === "language" && <Language />}
         {renderElement === "animations" && <Animations />}
         {renderElement === "contrast" && <Contrast />}
