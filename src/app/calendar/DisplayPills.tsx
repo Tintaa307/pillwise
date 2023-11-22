@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import FormPills from "./Form"
 import { IconPlus } from "@tabler/icons-react"
 import { PillsProps } from "@/types/types"
@@ -6,9 +6,21 @@ import { PillsProps } from "@/types/types"
 const DisplayPills = ({ pills }: { pills: PillsProps[] | undefined }) => {
   const [open, setOpen] = useState(false)
 
-  const arrHours = ["00:00", "04:00", "08:00", "12:00", "16:00", "20:00"]
+  const arrHours = [
+    { hour: "00:00", i: 0 },
+    { hour: "04:00", i: 1 },
+    { hour: "08:00", i: 2 },
+    { hour: "12:00", i: 3 },
+    { hour: "16:00", i: 4 },
+    { hour: "20:00", i: 5 },
+  ]
 
-  const colsNumber = 6
+  //56px difference between 4 hours
+  //1 hour = 14px
+
+  useEffect(() => {
+    console.log(pills)
+  }, [pills])
 
   return (
     <section className="w-full h-[60vh] bg-white flex items-center justify-center">
@@ -31,18 +43,29 @@ const DisplayPills = ({ pills }: { pills: PillsProps[] | undefined }) => {
                   key={index}
                   className="w-full h-full flex items-center justify-center"
                 >
-                  <span className="font-semibold">{hour}</span>
+                  <span className="font-semibold">{hour.hour}</span>
                 </div>
               ))}
             </nav>
           </header>
           <div className="relative w-[95%] h-[400px] grid grid-cols-6 place-items-center bg-gray-400/20 rounded-sm">
-            {Array.from(Array(colsNumber), (_, i) => (
+            {arrHours.map((hour, index) => (
               <div
-                key={i}
+                key={index}
                 className="w-full h-full flex items-center justify-center"
               >
-                <span className="w-[1px] h-full bg-slate-500/40"></span>
+                <span className="w-[1px] h-full bg-slate-500/40">
+                  {pills?.map((pill, index2) => (
+                    <div key={index2}>
+                      {hour.hour === pill.hour && (
+                        <div
+                          onClick={() => console.log(pill)}
+                          className="w-3 h-3 rounded-full bg-primary_blue mt-4"
+                        />
+                      )}
+                    </div>
+                  ))}
+                </span>
               </div>
             ))}
           </div>
