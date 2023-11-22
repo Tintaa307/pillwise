@@ -34,7 +34,7 @@ const Language = () => {
   }, [actualLang])
 
   return (
-    <section className="w-full h-full flex items-center justify-start flex-col gap-12">
+    <section className="w-full h-full flex items-center justify-start flex-col gap-10">
       <div className="w-full h-max flex items-center justify-center text-center mt-8">
         <h2 className="w-[70%] text-black text-2xl font-semibold">
           Selecciona tu idioma preferido
@@ -61,7 +61,7 @@ const Language = () => {
           </picture>
         ))}
       </div>
-      <SaveButton margin="mt-0 my-12" />
+      <SaveButton margin="mt-0 mb-14" />
     </section>
   )
 }
