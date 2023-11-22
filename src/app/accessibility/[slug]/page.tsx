@@ -24,7 +24,7 @@ const Config = ({ params }: { params: { slug: string } }) => {
           {title + params.slug.slice(1, params.slug.length)}
         </h1>
       </div>
-      <section className="w-full h-[78%] flex items-center justify-center bg-white rounded-3xl">
+      <section className="w-full h-[78%] flex items-center justify-center bg-white rounded-t-3xl">
         {renderElement === "language" && <Language />}
         {renderElement === "animations" && <Animations />}
         {renderElement === "contrast" && <Contrast />}
