@@ -75,7 +75,10 @@ export default function Home() {
                 Bienvenido, {session?.user.name}
               </h1>
               <div className="w-full h-max flex flex-row justify-center items-center gap-3">
-                <div className="w-[85%] h-[80px] flex items-center justify-center flex-row rounded-lg bg-[#2A0E8F] gap-4">
+                <div
+                  onClick={() => router.push("/history-of-pills")}
+                  className="w-[85%] h-[80px] flex items-center justify-center flex-row rounded-lg bg-[#2A0E8F] gap-4"
+                >
                   <h5 className="text-white font-semibold text-xl px-1">
                     Registro de pastillas
                   </h5>
