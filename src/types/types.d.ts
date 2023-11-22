@@ -5,12 +5,12 @@ declare global {
 }
 
 export interface PillsProps {
-  id: number
+  id?: number
   name: string
   description: string
   frequency: string
   hour: string
-  date: string
+  date: Date | undefined
   userId: number
 }
 

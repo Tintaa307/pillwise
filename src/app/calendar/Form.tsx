@@ -8,28 +8,18 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-import axios from "axios"
 import toast, { Toaster } from "react-hot-toast"
 import { useRouter } from "next/navigation"
+import { useMutation } from "react-query"
+import { createPill } from "@/lib/controllers/pills"
+import { PillsProps } from "@/types/types"
+import { IconX } from "@tabler/icons-react"
 
-const PillsSchema = Yup.object().shape({
-  title: Yup.string()
-    .min(3, "Too Short!")
-    .max(20, "Too Long!")
-    .required("Title Required"),
-  description: Yup.string()
-    .min(0, "The description is too short!")
-    .max(50, "The description is too long!")
-    .required("Description Required"),
-  date: Yup.date().required("Date Required"),
-  frecuency: Yup.string().required("Frecuency Required"),
-})
-
-interface PillsProps {
+interface PillsStateProps {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const FormPills = ({ setOpen }: PillsProps) => {
+const FormPills = ({ setOpen }: PillsStateProps) => {
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
   const [selectedDate, setSelectedDate] = useState<Date | undefined>()
@@ -95,33 +85,34 @@ const FormPills = ({ setOpen }: PillsProps) => {
     },
   ]
 
-  const handleSubmit = (e: any) => {
+  const createPillMutation = useMutation({
+    mutationKey: ["createPill"],
+    mutationFn: async (values: PillsProps) => {
+      await createPill(values)
+    },
+    onSuccess: () => {
+      toast.success("Pastilla agregada!")
+      router.push("/")
+    },
+    onError: () => {
+      toast.error("Error al crear la pastilla")
+    },
+  })
+
+  const handleSubmit = async (e: any) => {
     e.preventDefault()
     try {
-      axios
-        .post("/api/pills", {
-          title: title,
-          description: description,
-          date: selectedDate,
-          hour: selectedHour,
-          frequency: selectedFrecuency,
-          userId: session?.user.id,
-        })
-        .then((res) => {
-          console.log(res)
-          res.status === 200
-            ? toast.success("Pastilla Agregada!")
-            : toast.error("Error al agregar pastilla")
-
-          router.push("/dashboard")
-        })
-        .catch((err) => {
-          console.log(err)
-          toast.error("Error al agregar pastilla")
-        })
+      await createPillMutation.mutateAsync({
+        name: title,
+        description: description,
+        date: selectedDate,
+        hour: selectedHour,
+        frequency: selectedFrecuency,
+        userId: session?.user.id,
+      })
     } catch (error) {
-      console.log(error)
-      toast.error("Error al agregar pastilla")
+      console.log("error")
+      toast.error("Algo salio mal")
     }
   }
 
@@ -138,14 +129,13 @@ const FormPills = ({ setOpen }: PillsProps) => {
         className="w-[95%] h-[550px] flex bg-white items-center justify-start flex-col  rounded-[15px]"
       >
         <nav className="w-full h-max flex items-center justify-center">
-          <i
+          <IconX
             onClick={() => setOpen(false)}
-            className={["ri-close-line", "text-3xl absolute left-5 mt-4"].join(
-              " "
-            )}
+            className={"absolute left-7 mt-4"}
+            size={30}
           />
-          <div className="h-max w-max mt-4">
-            <h1 className="text-2xl font-semibold">Añadir pastilla</h1>
+          <div className="h-max w-max mt-5">
+            <h1 className="text-[26px] font-semibold">Añadir pastilla</h1>
           </div>
         </nav>
         <div className="w-full h-full flex items-center justify-center">

@@ -34,7 +34,7 @@ const Register = () => {
   const router = useRouter()
 
   const createUserMutation = useMutation({
-    mutationKey: ["createRutine"],
+    mutationKey: ["createUser"],
     mutationFn: async (values: UserValues) => {
       await createUser({
         name: values.name,

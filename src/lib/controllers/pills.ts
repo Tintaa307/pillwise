@@ -1,3 +1,4 @@
+import { PillsProps } from "@/types/types"
 import axios from "axios"
 
 const pillsAPI = axios.create({
@@ -10,4 +11,8 @@ const pillsAPI = axios.create({
 export const getPills = async (id: string) => {
   const pills = await pillsAPI.get(`/get/${id}`)
   return pills.data
+}
+
+export const createPill = async (pill: PillsProps) => {
+  await pillsAPI.post("/create", pill)
 }
