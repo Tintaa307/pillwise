@@ -10,6 +10,11 @@ type DisplayPillsProps = {
 }
 
 const DisplayPills = ({ pills, open, setOpen }: DisplayPillsProps) => {
+  const [indexOfHours, setIndexOfHours] = useState<number[]>([])
+  const [arrOfPillsMiddleHours, setArrOfPillsMiddleHours] = useState<number[]>(
+    []
+  )
+
   const arrHours = [
     { hour: "00:00", i: 0 },
     { hour: "04:00", i: 1 },
@@ -19,18 +24,143 @@ const DisplayPills = ({ pills, open, setOpen }: DisplayPillsProps) => {
     { hour: "20:00", i: 5 },
   ]
 
-  const arrFullHours = []
+  const arrFullHours = [
+    {
+      hour: "00:00",
+      value: 0,
+    },
+    {
+      hour: "01:00",
+      value: 1,
+    },
+    {
+      hour: "02:00",
+      value: 2,
+    },
+    {
+      hour: "03:00",
+      value: 3,
+    },
+    {
+      hour: "04:00",
+      value: 4,
+    },
+    {
+      hour: "05:00",
+      value: 5,
+    },
+    {
+      hour: "06:00",
+      value: 6,
+    },
+    {
+      hour: "07:00",
+      value: 7,
+    },
+    {
+      hour: "08:00",
+      value: 8,
+    },
+    {
+      hour: "09:00",
+      value: 9,
+    },
+    {
+      hour: "10:00",
+      value: 10,
+    },
+    {
+      hour: "11:00",
+      value: 11,
+    },
+    {
+      hour: "12:00",
+      value: 12,
+    },
+    {
+      hour: "13:00",
+      value: 13,
+    },
+    {
+      hour: "14:00",
+      value: 14,
+    },
+    {
+      hour: "15:00",
+      value: 15,
+    },
+    {
+      hour: "16:00",
+      value: 16,
+    },
+    {
+      hour: "17:00",
+      value: 17,
+    },
+    {
+      hour: "18:00",
+      value: 18,
+    },
+    {
+      hour: "19:00",
+      value: 19,
+    },
+    {
+      hour: "20:00",
+      value: 20,
+    },
+    {
+      hour: "21:00",
+      value: 21,
+    },
+    {
+      hour: "22:00",
+      value: 22,
+    },
+    {
+      hour: "23:00",
+      value: 23,
+    },
+  ]
+
+  useEffect(() => {
+    const middleHours = arrFullHours.filter((hour) => hour.value % 4 !== 0)
+    console.log(middleHours)
+
+    pills?.map((pill) => {
+      middleHours.map((hour) => {
+        if (pill.hour === hour.hour) {
+          const value = arrFullHours.find(
+            (hour) => hour.hour === pill.hour
+          )?.value
+          console.log(value)
+
+          const middleValue = arrFullHours.find(
+            (hour) => hour.hour === pill.hour
+          )?.value
+
+          const postValue = Number(middleValue! + 2)
+          const prevValue = Number(middleValue! - 2)
+
+          if (prevValue % 4 === 0) {
+            const i = prevValue / 4
+            console.log(i)
+
+            setIndexOfHours((prev) =>
+              [...prev, i].filter((v, i, a) => a.indexOf(v) === i)
+            )
+          }
+        }
+      })
+    })
+  }, [])
+
+  useEffect(() => {
+    console.log(indexOfHours)
+  }, [indexOfHours])
 
   //56px difference between 4 hours
   //1 hour = 14px
-
-  useEffect(() => {
-    console.log(pills)
-  }, [pills])
-
-  useEffect(() => {
-    console.log("display Pills: ", open)
-  }, [open])
 
   return (
     <section className="w-full h-[70vh] bg-white flex items-center justify-center">
@@ -71,6 +201,16 @@ const DisplayPills = ({ pills, open, setOpen }: DisplayPillsProps) => {
                         <div
                           onClick={() => console.log(pill)}
                           className="w-3 h-3 rounded-full bg-primary_blue mt-4"
+                        />
+                      )}
+                    </div>
+                  ))}
+                  {indexOfHours.map((i, index3) => (
+                    <div key={index3}>
+                      {i === hour.i && (
+                        <div
+                          onClick={() => console.log(i)}
+                          className="w-3 h-3 rounded-full bg-primary_blue mt-4 ml-[28px]"
                         />
                       )}
                     </div>
