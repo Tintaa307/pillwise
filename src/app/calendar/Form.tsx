@@ -120,13 +120,13 @@ const FormPills = ({ setOpen }: PillsStateProps) => {
     <motion.article
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1, transition: { duration: 0.4, type: "tween" } }}
-      className="w-full h-screen bg-[#0000007c] flex items-center justify-center absolute top-0 left-0"
+      className="w-full h-screen bg-[#0000007c] flex items-center justify-center absolute top-0 left-0 z-30"
     >
       <Toaster />
       <motion.div
         initial={{ scale: 0 }}
         whileInView={{ scale: 1, transition: { duration: 0.4, type: "tween" } }}
-        className="w-[95%] h-[550px] flex bg-white items-center justify-start flex-col  rounded-[15px]"
+        className="w-[95%] h-[550px] flex bg-white items-center justify-start flex-col rounded-[15px]"
       >
         <nav className="w-full h-max flex items-center justify-center">
           <IconX

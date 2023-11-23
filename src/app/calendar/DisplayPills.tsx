@@ -3,9 +3,13 @@ import FormPills from "./Form"
 import { IconPlus } from "@tabler/icons-react"
 import { PillsProps } from "@/types/types"
 
-const DisplayPills = ({ pills }: { pills: PillsProps[] | undefined }) => {
-  const [open, setOpen] = useState(false)
+type DisplayPillsProps = {
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>
+  open: boolean
+  pills: PillsProps[] | undefined
+}
 
+const DisplayPills = ({ pills, open, setOpen }: DisplayPillsProps) => {
   const arrHours = [
     { hour: "00:00", i: 0 },
     { hour: "04:00", i: 1 },
@@ -15,6 +19,8 @@ const DisplayPills = ({ pills }: { pills: PillsProps[] | undefined }) => {
     { hour: "20:00", i: 5 },
   ]
 
+  const arrFullHours = []
+
   //56px difference between 4 hours
   //1 hour = 14px
 
@@ -22,8 +28,12 @@ const DisplayPills = ({ pills }: { pills: PillsProps[] | undefined }) => {
     console.log(pills)
   }, [pills])
 
+  useEffect(() => {
+    console.log("display Pills: ", open)
+  }, [open])
+
   return (
-    <section className="w-full h-[60vh] bg-white flex items-center justify-center">
+    <section className="w-full h-[70vh] bg-white flex items-center justify-center">
       {pills?.length === 0 ? (
         <>
           <div
@@ -32,10 +42,10 @@ const DisplayPills = ({ pills }: { pills: PillsProps[] | undefined }) => {
           >
             <IconPlus size={150} color="#2A0E8F" className="font-bold" />
           </div>
-          {open && <FormPills setOpen={setOpen} />}
         </>
       ) : (
         <div className="w-full h-full flex items-center justify-center flex-col">
+          {open && <FormPills setOpen={setOpen} />}
           <header className="w-[95%] h-max flex items-center justify-center">
             <nav className="w-full h-max grid grid-cols-6 place-items-center">
               {arrHours.map((hour, index) => (
@@ -48,7 +58,7 @@ const DisplayPills = ({ pills }: { pills: PillsProps[] | undefined }) => {
               ))}
             </nav>
           </header>
-          <div className="relative w-[95%] h-[400px] grid grid-cols-6 place-items-center bg-gray-400/20 rounded-sm">
+          <div className="relative w-[95%] h-[300px] grid grid-cols-6 place-items-center bg-gray-400/20 rounded-sm">
             {arrHours.map((hour, index) => (
               <div
                 key={index}

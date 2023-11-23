@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import React, { useState } from "react"
 import DisplayDays from "./DisplayDays"
 import DisplayPills from "./DisplayPills"
 import Loader from "@/components/web/shared/Loader"
@@ -12,6 +12,7 @@ import { useSession } from "next-auth/react"
 const Calendar = () => {
   const { data: session } = useSession()
   const queryClient = new QueryClient()
+  const [open, setOpen] = useState(false)
   const {
     data: pills,
     isLoading,
@@ -38,8 +39,8 @@ const Calendar = () => {
   return (
     <main className="w-full h-screen">
       <div className="w-full h-full flex items-center justify-center flex-col">
-        <DisplayDays pills={pills} />
-        <DisplayPills pills={pills} />
+        <DisplayDays setOpen={setOpen} open={open} pills={pills} />
+        <DisplayPills setOpen={setOpen} open={open} pills={pills} />
       </div>
     </main>
   )

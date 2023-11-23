@@ -15,7 +15,7 @@ export async function POST(req: Request) {
       throw new Error("Response is empty")
     }
 
-    const { title, description, date, frequency, hour, userId } = response
+    const { name, description, date, frequency, hour, userId } = response
 
     console.log("response: ", response)
 
@@ -27,7 +27,7 @@ export async function POST(req: Request) {
 
     const addPills = await prismadb.pills.create({
       data: {
-        name: title,
+        name: name,
         description: description,
         frequency: frequency,
         hour: hour,
