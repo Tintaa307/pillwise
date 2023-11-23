@@ -130,16 +130,10 @@ const DisplayPills = ({ pills, open, setOpen }: DisplayPillsProps) => {
     pills?.map((pill) => {
       middleHours.map((hour) => {
         if (pill.hour === hour.hour) {
-          const value = arrFullHours.find(
-            (hour) => hour.hour === pill.hour
-          )?.value
-          console.log(value)
-
           const middleValue = arrFullHours.find(
             (hour) => hour.hour === pill.hour
           )?.value
 
-          const postValue = Number(middleValue! + 2)
           const prevValue = Number(middleValue! - 2)
 
           if (prevValue % 4 === 0) {
