@@ -145,7 +145,7 @@ const FormPills = ({ setOpen }: PillsStateProps) => {
             className="w-full h-full flex items-center justify-center flex-col gap-5"
           >
             <input
-              className="w-[70%] h-12 border-2 border-[#2A0E8F] rounded-[11px] px-2 text-black font-normal text-lg outline-none"
+              className="w-[80%] h-12 border-2 border-[#2A0E8F] rounded-sm px-2 text-black font-normal text-lg outline-none"
               name="title"
               type="text"
               value={title}
@@ -156,13 +156,13 @@ const FormPills = ({ setOpen }: PillsStateProps) => {
             <input
               onChange={(e) => setDescription(e.target.value)}
               value={description}
-              className="w-[70%] h-12 border-2 border-[#2A0E8F] rounded-[11px] px-2 text-black font-normal text-lg outline-none"
+              className="w-[80%] h-12 border-2 border-[#2A0E8F] rounded-sm px-2 text-black font-normal text-lg outline-none"
               name="description"
               type="text"
               placeholder="Descripcion..."
             />
 
-            <div className="w-[70%] h-12 border-2 border-[#2A0E8F] rounded-[11px] px-2 text-black font-normal text-lg outline-none flex items-center justify-evenly gap-2">
+            <div className="w-[80%] h-12 border-2 border-[#2A0E8F] rounded-sm px-2 text-black font-normal text-lg outline-none flex items-center justify-evenly gap-2">
               <span className="text-[#949494] text-base">A partir</span>
               <Popover>
                 <PopoverTrigger asChild>
@@ -208,7 +208,7 @@ const FormPills = ({ setOpen }: PillsStateProps) => {
             <Popover>
               <PopoverTrigger asChild>
                 <button
-                  className="w-[70%] h-12 border-2 border-[#2A0E8F] rounded-[11px] px-2 text-[#949494] font-normal text-lg outline-none flex items-center justify-start"
+                  className="w-[80%] h-12 border-2 border-[#2A0E8F] rounded-sm px-2 text-[#949494] font-normal text-lg outline-none flex items-center justify-start"
                   name="frecuency"
                 >
                   Repetir{" "}
@@ -240,7 +240,7 @@ const FormPills = ({ setOpen }: PillsStateProps) => {
             </Popover>
             <button
               type="submit"
-              className="w-[70%] h-12 bg-[#2A0E8F] rounded-[9px] text-white text-lg font-semibold outline-none"
+              className="w-[80%] h-12 bg-[#2A0E8F] rounded-sm text-white text-lg font-semibold outline-none"
             >
               Agregar
             </button>
