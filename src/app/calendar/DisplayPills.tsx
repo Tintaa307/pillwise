@@ -21,6 +21,9 @@ const DisplayPills = ({ pills, open, setOpen }: DisplayPillsProps) => {
   // )
 
   const [pillsHours, setPillsHour] = useState<PillsHoursProps[]>([])
+  const [userScreenWidht, setUserScreenWidth] = useState<number>(0)
+  const [calendarWidth, setCalendarWidth] = useState<number>(0)
+  const [oneHourPx, setOneHourPx] = useState<number>(0)
 
   const arrHours = [
     { hour: "00:00", i: 0 },
@@ -177,7 +180,14 @@ const DisplayPills = ({ pills, open, setOpen }: DisplayPillsProps) => {
 
   useEffect(() => {
     console.log(pillsHours)
-  }, [pillsHours])
+    console.log(pills)
+  }, [pillsHours, pills])
+
+  useEffect(() => {
+    setUserScreenWidth(window.innerWidth)
+    setCalendarWidth(userScreenWidht)
+    setOneHourPx(calendarWidth / 6 / 4)
+  }, [userScreenWidht, calendarWidth, oneHourPx])
 
   return (
     <section className="w-full h-[70vh] bg-white flex items-center justify-center">
@@ -206,29 +216,32 @@ const DisplayPills = ({ pills, open, setOpen }: DisplayPillsProps) => {
             </nav>
           </header>
           <div className="relative w-[95%] h-[300px] grid grid-cols-6 place-items-center bg-gray-400/20 rounded-sm">
+            <div className="w-full h-full flex items-start justify-start absolute flex-col">
+              {pills?.map((pill, index) => (
+                <div
+                  key={index}
+                  onClick={() => {
+                    console.log(pill)
+                  }}
+                  className="relative w-3 h-3 bg-[#2A0E8F] rounded-full mt-4"
+                  style={{
+                    left: `${
+                      (calendarWidth / 6 / 4) * pillsHours[index]?.hour +
+                      oneHourPx * 2 -
+                      10 +
+                      (calendarWidth / 6 / 4) *
+                        (pillsHours[index]?.minutes / 60)
+                    }px`,
+                  }}
+                />
+              ))}
+            </div>
             {arrHours.map((hour, index) => (
               <div
                 key={index}
                 className="w-full h-full flex items-center justify-center"
               >
-                <span className="w-[1px] h-full bg-slate-500/40">
-                  {pills?.map((pill, index) => (
-                    <div key={index}>
-                      {pillsHours.map((pillHour, index2) => (
-                        <div
-                          onClick={() => console.log(pill)}
-                          key={index2}
-                          className="absolute w-3 h-3 bg-[#2A0E8F] rounded-full mt-4"
-                          style={{
-                            left:
-                              `${pillHour.hour * 14 + "px"}` +
-                              `${pillHour.minutes * 0.233333333 + "px"}`,
-                          }}
-                        />
-                      ))}
-                    </div>
-                  ))}
-                </span>
+                <span className="w-[1px] h-full bg-slate-500/40" />
               </div>
             ))}
           </div>
