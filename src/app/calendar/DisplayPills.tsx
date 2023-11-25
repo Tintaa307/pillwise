@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import FormPills from "./Form"
 import { IconPlus } from "@tabler/icons-react"
 import { PillsProps } from "@/types/types"
+import { cn } from "@/lib/utils"
 
 type DisplayPillsProps = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
@@ -187,17 +188,23 @@ const DisplayPills = ({ pills, open, setOpen }: DisplayPillsProps) => {
     setUserScreenWidth(window.innerWidth)
     setCalendarWidth(userScreenWidht)
     setOneHourPx(calendarWidth / 6 / 4)
-  }, [userScreenWidht, calendarWidth, oneHourPx])
+  }, [userScreenWidht, calendarWidth])
 
   return (
     <section className="w-full h-[70vh] bg-white flex items-center justify-center">
       {pills?.length === 0 ? (
         <>
+          {open && <FormPills setOpen={setOpen} />}
           <div
             onClick={() => setOpen(true)}
-            className="w-[225px] h-[225px] bg-[#CACACA] rounded-full flex items-center justify-center"
+            className="relative w-[225px] h-[225px] bg-[#CACACA] rounded-full flex items-center justify-center"
           >
-            <IconPlus size={150} color="#2A0E8F" className="font-bold" />
+            <IconPlus
+              onClick={() => setOpen(true)}
+              size={150}
+              color="#2A0E8F"
+              className="font-bold"
+            />
           </div>
         </>
       ) : (
@@ -223,15 +230,35 @@ const DisplayPills = ({ pills, open, setOpen }: DisplayPillsProps) => {
                   onClick={() => {
                     console.log(pill)
                   }}
-                  className="relative w-3 h-3 bg-[#2A0E8F] rounded-full mt-4"
+                  className={cn(
+                    "relative w-3 h-3 bg-[#2A0E8F] rounded-full mt-4"
+                  )}
                   style={{
-                    left: `${
-                      (calendarWidth / 6 / 4) * pillsHours[index]?.hour +
-                      oneHourPx * 2 -
-                      10 +
-                      (calendarWidth / 6 / 4) *
-                        (pillsHours[index]?.minutes / 60)
-                    }px`,
+                    left:
+                      pillsHours[index]?.hour >= 21
+                        ? pillsHours[index]?.minutes > 0 ||
+                          pillsHours[index]?.hour > 21
+                          ? `${
+                              oneHourPx * (pillsHours[index]?.hour - 21) -
+                              10 +
+                              (calendarWidth / 6 / 4) *
+                                (pillsHours[index]?.minutes / 60)
+                            }px`
+                          : `${
+                              (calendarWidth / 6 / 4) *
+                                pillsHours[index]?.hour +
+                              oneHourPx * 2 -
+                              10 +
+                              (calendarWidth / 6 / 4) *
+                                (pillsHours[index]?.minutes / 60)
+                            }px`
+                        : `${
+                            (calendarWidth / 6 / 4) * pillsHours[index]?.hour +
+                            oneHourPx * 2 -
+                            10 +
+                            (calendarWidth / 6 / 4) *
+                              (pillsHours[index]?.minutes / 60)
+                          }px`,
                   }}
                 />
               ))}

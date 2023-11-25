@@ -10,8 +10,9 @@ import Loader from "@/components/web/shared/Loader"
 import { PillsProps } from "@/types/types"
 import { IconMenu2, IconHistory } from "@tabler/icons-react"
 import { useQuery } from "react-query"
-import { getPills } from "@/lib/controllers/pills"
+import { getPills, getPillsByDate } from "@/lib/controllers/pills"
 import { QueryClient } from "react-query"
+import { cn } from "@/lib/utils"
 
 export default function Home() {
   const { status, data: session } = useSession()
@@ -21,6 +22,7 @@ export default function Home() {
   const [auth, setAuth] = useState(NOT_AUTH)
   const queryClient = new QueryClient()
   const router = useRouter()
+  const date = new Date().toISOString()
 
   const {
     data: pills,
@@ -31,7 +33,7 @@ export default function Home() {
     queryKey: ["pills"],
     enabled: !!session?.user?.id,
     queryFn: async () => {
-      const pills = await getPills(session?.user?.id!)
+      const pills = await getPillsByDate(session?.user?.id!, date)
       return pills as PillsProps[]
     },
     onSuccess: () => {
@@ -103,7 +105,12 @@ export default function Home() {
                       },
                     }}
                     key={index}
-                    className="w-[85%] h-[90px] flex items-center justify-between rounded-lg bg-[#2A0E8F]"
+                    className={cn(
+                      "w-[85%] h-[90px] flex items-center justify-between rounded-lg bg-[#2A0E8F]",
+                      {
+                        "mb-20": index === pills.length - 1,
+                      }
+                    )}
                   >
                     <div className="w-full h-full flex items-center justify-center">
                       <strong className="text-white font-semibold text-6xl ml-2">

@@ -51,7 +51,7 @@ const DisplayDays = ({ pills, open, setOpen }: DisplayDaysProps) => {
         <article className="relative w-full h-max rounded-md flex mt-2">
           {pills?.length === 0 ? (
             <div className="w-full h-full flex items-center justify-center">
-              <strong className="text-black text-xl font-semibold">
+              <strong className="text-white/60 text-xl font-semibold">
                 Aún no tienes pastillas agregadas
               </strong>
             </div>

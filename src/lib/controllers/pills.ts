@@ -13,6 +13,11 @@ export const getPills = async (id: string) => {
   return pills.data
 }
 
+export const getPillsByDate = async (id: string, date: string) => {
+  const pills = await pillsAPI.get(`/get/${id}/${date}`)
+  return pills.data
+}
+
 export const createPill = async (pill: PillsProps) => {
   await pillsAPI.post("/create", pill)
 }

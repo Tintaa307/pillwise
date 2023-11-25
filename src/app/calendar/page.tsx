@@ -6,13 +6,14 @@ import DisplayPills from "./DisplayPills"
 import Loader from "@/components/web/shared/Loader"
 import { PillsProps } from "@/types/types"
 import { QueryClient, useQuery } from "react-query"
-import { getPills } from "@/lib/controllers/pills"
+import { getPills, getPillsByDate } from "@/lib/controllers/pills"
 import { useSession } from "next-auth/react"
 
 const Calendar = () => {
   const { data: session } = useSession()
   const queryClient = new QueryClient()
   const [open, setOpen] = useState(false)
+  const date = new Date().toISOString().slice(0, 10)
   const {
     data: pills,
     isLoading,
@@ -22,7 +23,7 @@ const Calendar = () => {
     queryKey: ["pills"],
     enabled: !!session?.user?.id,
     queryFn: async () => {
-      const pills = await getPills(session?.user?.id!)
+      const pills = await getPillsByDate(session?.user?.id!, date)
       return pills as PillsProps[]
     },
     onSuccess: () => {

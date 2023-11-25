@@ -105,7 +105,7 @@ const FormPills = ({ setOpen }: PillsStateProps) => {
       await createPillMutation.mutateAsync({
         name: title,
         description: description,
-        date: selectedDate,
+        date: selectedDate ? selectedDate : new Date(),
         hour: selectedHour,
         frequency: selectedFrecuency,
         userId: session?.user.id,

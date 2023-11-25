@@ -3,7 +3,7 @@ import prismadb from "@/lib/db"
 
 export async function GET(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: { date: string; id: string } }
 ) {
   try {
     if (req.method !== "GET")
@@ -12,7 +12,9 @@ export async function GET(
         { status: 405 }
       )
 
-    if (!params.id)
+    console.log(params)
+
+    if (!params.date || !params.id)
       return NextResponse.json(
         { message: "You are not logged" },
         { status: 400 }
@@ -21,10 +23,9 @@ export async function GET(
     const pills = await prismadb.pills.findMany({
       where: {
         userId: Number(params.id),
+        date: params.date.slice(0, 10),
       },
     })
-
-    console.log(pills)
 
     if (!pills) {
       return NextResponse.json(

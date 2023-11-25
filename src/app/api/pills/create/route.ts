@@ -31,7 +31,7 @@ export async function POST(req: Request) {
         description: description,
         frequency: frequency,
         hour: hour,
-        date: date,
+        date: date.slice(0, 10),
         userId: userId,
       },
     })
