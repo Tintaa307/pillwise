@@ -23,6 +23,26 @@ export default function Home() {
   const queryClient = new QueryClient()
   const router = useRouter()
   const date = new Date().toISOString()
+  const [horaCercana, setHoraCercana] = useState<string | undefined>("")
+  const [actualDay, setActualDay] = useState<string>("")
+
+  const fecha = new Date()
+  const numeroDiaSemana = fecha.getDay()
+
+  const diasSemana = [
+    "Domingo",
+    "Lunes",
+    "Martes",
+    "Miércoles",
+    "Jueves",
+    "Viernes",
+    "Sábado",
+  ]
+
+  useEffect(() => {
+    const diaSemanaActual = diasSemana[numeroDiaSemana]
+    setActualDay(diaSemanaActual)
+  }, [fecha])
 
   const {
     data: pills,
@@ -43,6 +63,48 @@ export default function Home() {
       console.log("error")
     },
   })
+
+  // Obtén la hora actual
+  const horaActual = new Date().getHours()
+  const [pillsHours, setPillsHour] = useState<string[]>([])
+
+  useEffect(() => {
+    if (pills) {
+      const hours = pills.map((pill) => pill.hour)
+      setPillsHour(hours)
+    }
+    console.log(pills)
+  }, [pills])
+
+  function obtenerProximaHoraMasCercana(horasAComparar: string[]) {
+    const ahora = new Date()
+    const horaActual = ahora.getHours()
+    const minutosActuales = ahora.getMinutes()
+    const tiempoActual = horaActual * 60 + minutosActuales
+
+    const horasFuturas = horasAComparar
+      .map((hora) => {
+        const [horaStr, minutosStr] = hora.split(":")
+        const tiempo = Number(horaStr) * 60 + Number(minutosStr)
+        return tiempo > tiempoActual ? tiempo : Infinity
+      })
+      .filter((tiempo) => tiempo !== Infinity)
+
+    const proximaHora = Math.min(...horasFuturas)
+
+    const horas = Math.floor(proximaHora / 60)
+    const minutos = proximaHora % 60
+    const proximaHoraFormateada = `${horas
+      .toString()
+      .padStart(2, "0")}:${minutos.toString().padStart(2, "0")}`
+
+    return proximaHoraFormateada
+  }
+
+  useEffect(() => {
+    const proximaHora = obtenerProximaHoraMasCercana(pillsHours)
+    setHoraCercana(proximaHora)
+  }, [horaActual])
 
   useEffect(() => {
     if (status === LOADING) {
@@ -92,38 +154,46 @@ export default function Home() {
                 </div>
               </div>
               <motion.div className="w-full h-max flex items-center justify-center flex-col mt-8 gap-4">
-                {pills?.map((pill, index) => (
-                  <motion.div
-                    initial={{ opacity: 0, y: -60 }}
-                    whileInView={{
-                      opacity: 1,
-                      y: 0,
-                      transition: {
-                        duration: 0.3,
-                        delay: 0.1 * index,
-                        type: "tween",
-                      },
-                    }}
-                    key={index}
-                    className={cn(
-                      "w-[85%] h-[90px] flex items-center justify-between rounded-lg bg-[#2A0E8F]",
-                      {
-                        "mb-20": index === pills.length - 1,
-                      }
-                    )}
-                  >
-                    <div className="w-full h-full flex items-center justify-center">
-                      <strong className="text-white font-semibold text-6xl ml-2">
-                        {pill.hour}
-                      </strong>
-                    </div>
-                    <div className="w-full h-full flex items-center justify-center">
-                      <h5 className="font-semibold text-white text-lg">
-                        {pill.name} <br />
-                      </h5>
-                    </div>
-                  </motion.div>
-                ))}
+                {pills
+                  ?.map((pill, index) => (
+                    <motion.div
+                      initial={{ opacity: 0, y: -60 }}
+                      whileInView={{
+                        opacity: 1,
+                        y: 0,
+                        transition: {
+                          duration: 0.3,
+                          delay: 0.1 * index,
+                          type: "tween",
+                        },
+                      }}
+                      key={index}
+                      className={cn(
+                        "w-[85%] h-[90px] flex items-center justify-between rounded-lg bg-primary_grey transition-colors duration-200",
+                        {
+                          "mb-20": index === 0,
+
+                          "bg-primary_blue transition-colors duration-200":
+                            pill.hour === horaCercana,
+                        }
+                      )}
+                    >
+                      <div className="w-full h-full flex items-center justify-center">
+                        <strong className="text-white font-semibold text-6xl ml-2">
+                          {pill.hour}
+                        </strong>
+                      </div>
+                      <div className="w-full h-full flex items-center justify-center flex-col">
+                        <h5 className="font-semibold text-white text-lg">
+                          {pill.name} <br />
+                        </h5>
+                        <small className="text-white font-semibold text-xs">
+                          {actualDay}
+                        </small>
+                      </div>
+                    </motion.div>
+                  ))
+                  .reverse()}
               </motion.div>
             </div>
           </main>
