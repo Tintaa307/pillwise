@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { statusAuth } from "@/objects/status"
@@ -29,6 +29,7 @@ export default function Home() {
   const date = new Date().toISOString()
   const [horaCercana, setHoraCercana] = useState<string | undefined>("")
   const [actualDay, setActualDay] = useState<string>("")
+  const pillDivRef = useRef<HTMLDivElement | null>(null)
 
   const fecha = new Date()
   const numeroDiaSemana = fecha.getDay()
@@ -185,63 +186,73 @@ export default function Home() {
               <motion.div className="relative w-full h-max flex items-center justify-center flex-col mt-8 gap-4">
                 {pills?.pages.map((page, index) => (
                   <div
-                    className="w-full h-max flex items-center justify-center flex-col gap-4"
+                    ref={pillDivRef}
+                    className={cn(
+                      "w-full h-max flex items-center justify-center flex-col gap-4",
+                      {
+                        hidden:
+                          index === pills?.pages.length - 1 &&
+                          pillDivRef.current?.children.length === 0,
+                      }
+                    )}
                     key={index}
                   >
-                    {page
-                      .map((pill, i) => (
-                        <motion.div
-                          initial={{ opacity: 0, y: -60 }}
-                          whileInView={{
-                            opacity: 1,
-                            y: 0,
-                            transition: {
-                              duration: 0.3,
-                              delay: 0.1 * index,
-                              type: "tween",
-                            },
-                          }}
-                          key={i}
-                          className={cn(
-                            "w-[85%] h-[90px] flex items-center justify-between rounded-lg bg-primary_grey transition-colors duration-200",
-                            {
-                              "bg-primary_blue transition-colors duration-200":
-                                pill.hour === horaCercana,
-                            }
-                          )}
-                        >
-                          <div className="w-full h-full flex items-center justify-center">
-                            <strong className="text-white font-semibold text-6xl ml-2">
-                              {pill.hour}
-                            </strong>
-                          </div>
-                          <div className="w-full h-full flex items-center justify-center flex-col">
-                            <h5 className="font-semibold text-white text-lg">
-                              {pill.name} <br />
-                            </h5>
-                            <small className="text-white font-semibold text-xs">
-                              {actualDay}
-                            </small>
-                          </div>
-                        </motion.div>
-                      ))
-                      .reverse()}
+                    {page.map((pill, i) => (
+                      <motion.div
+                        initial={{ opacity: 0, y: -60 }}
+                        whileInView={{
+                          opacity: 1,
+                          y: 0,
+                          transition: {
+                            duration: 0.3,
+                            delay: 0.1 * index,
+                            type: "tween",
+                          },
+                        }}
+                        viewport={{ once: true }}
+                        key={i}
+                        className={cn(
+                          "w-[85%] h-[90px] flex items-center justify-between rounded-lg bg-primary_grey transition-colors duration-200",
+                          {
+                            "bg-primary_blue transition-colors duration-200":
+                              pill.hour === horaCercana,
+                          }
+                        )}
+                      >
+                        <div className="w-full h-full flex items-center justify-center">
+                          <strong className="text-white font-semibold text-6xl ml-2">
+                            {pill.hour}
+                          </strong>
+                        </div>
+                        <div className="w-full h-full flex items-center justify-center flex-col">
+                          <h5 className="font-semibold text-white text-lg">
+                            {pill.name} <br />
+                          </h5>
+                          <small className="text-white font-semibold text-xs">
+                            {actualDay}
+                          </small>
+                        </div>
+                      </motion.div>
+                    ))}
                   </div>
                 ))}
-
-                <div className="w-[85%] h-max flex items-end justify-end mb-20">
-                  <button
-                    onClick={() => fetchNextPage()}
-                    disabled={isFetchingNextPage}
-                    className="text-sm font-semibold text-blue-600 bg-transparent border-none outline-none"
-                  >
-                    {isFetchingNextPage
-                      ? "Cargando..."
-                      : (pills?.pages.length ?? 0) < 3
-                      ? "Ver más..."
-                      : "No hay más pastillas"}
-                  </button>
-                </div>
+                {pills?.pages[0]?.length! >= 5 && (
+                  <div className="w-[85%] h-max flex items-end justify-end mb-20">
+                    <button
+                      onClick={() => {
+                        fetchNextPage()
+                      }}
+                      disabled={isFetchingNextPage}
+                      className="text-sm font-semibold text-blue-600 bg-transparent border-none outline-none"
+                    >
+                      {isFetchingNextPage
+                        ? "Cargando..."
+                        : (pills?.pages.length ?? 0) < 3
+                        ? "Ver más..."
+                        : "No hay más pastillas"}
+                    </button>
+                  </div>
+                )}
               </motion.div>
             </div>
           </main>

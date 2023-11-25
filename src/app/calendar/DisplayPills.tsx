@@ -3,6 +3,7 @@ import FormPills from "./Form"
 import { IconPlus } from "@tabler/icons-react"
 import { PillsProps } from "@/types/types"
 import { cn } from "@/lib/utils"
+import PillInfo from "@/components/web/pill-info"
 
 type DisplayPillsProps = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
@@ -25,6 +26,8 @@ const DisplayPills = ({ pills, open, setOpen }: DisplayPillsProps) => {
   const [userScreenWidht, setUserScreenWidth] = useState<number>(0)
   const [calendarWidth, setCalendarWidth] = useState<number>(0)
   const [oneHourPx, setOneHourPx] = useState<number>(0)
+  const [pillInfo, setPillInfo] = useState<PillsProps | undefined>()
+  const [pillInfoOpen, setPillInfoOpen] = useState<boolean>(false)
 
   const arrHours = [
     { hour: "00:00", i: 0 },
@@ -229,7 +232,8 @@ const DisplayPills = ({ pills, open, setOpen }: DisplayPillsProps) => {
                   <div
                     key={index}
                     onClick={() => {
-                      console.log(pill)
+                      setPillInfo(pill)
+                      setPillInfoOpen(true)
                     }}
                     className={cn(
                       "relative w-3 h-3 bg-[#2A0E8F] rounded-full mt-4"
@@ -276,6 +280,7 @@ const DisplayPills = ({ pills, open, setOpen }: DisplayPillsProps) => {
           </div>
         </div>
       )}
+      {pillInfoOpen && <PillInfo {...pillInfo!} />}
     </section>
   )
 }

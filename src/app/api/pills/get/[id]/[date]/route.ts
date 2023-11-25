@@ -25,6 +25,9 @@ export async function GET(
         userId: Number(params.id),
         date: params.date.slice(0, 10),
       },
+      orderBy: {
+        createdAt: "desc",
+      },
     })
 
     if (!pills) {
