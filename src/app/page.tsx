@@ -9,8 +9,12 @@ import Sidebar from "@/components/web/sidebar/Sidebar"
 import Loader from "@/components/web/shared/Loader"
 import { PillsProps } from "@/types/types"
 import { IconMenu2, IconHistory } from "@tabler/icons-react"
-import { useQuery } from "react-query"
-import { getPills, getPillsByDate } from "@/lib/controllers/pills"
+import { useInfiniteQuery } from "react-query"
+import {
+  getPills,
+  getPillsByDate,
+  getPillsByDateAndScroll,
+} from "@/lib/controllers/pills"
 import { QueryClient } from "react-query"
 import { cn } from "@/lib/utils"
 
@@ -49,18 +53,31 @@ export default function Home() {
     isLoading,
     isError,
     error,
-  } = useQuery({
+    fetchNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
     queryKey: ["pills"],
     enabled: !!session?.user?.id,
-    queryFn: async () => {
-      const pills = await getPillsByDate(session?.user?.id!, date)
+    queryFn: async ({ pageParam = 1 }) => {
+      const pills = await getPillsByDateAndScroll(
+        session?.user?.id!,
+        date,
+        pageParam
+      )
       return pills as PillsProps[]
+    },
+    getNextPageParam: (_, pages) => {
+      return pages.length + 1
     },
     onSuccess: () => {
       queryClient.invalidateQueries("pills")
     },
     onError: () => {
       console.log("error")
+    },
+    initialData: {
+      pages: [],
+      pageParams: [1],
     },
   })
 
@@ -70,11 +87,20 @@ export default function Home() {
 
   useEffect(() => {
     if (pills) {
-      const hours = pills.map((pill) => pill.hour)
-      setPillsHour(hours)
+      const hours = pills?.pages.map((page) => page.map((pill) => pill.hour))
+      const hour = hours[0]?.map((h) => h)
+      if (pills.pages.length > 1) {
+        const hour2 = hours[hours.length - 1]?.map((h) => h)
+        hour?.push(...hour2!)
+      }
+      setPillsHour(hour!)
     }
     console.log(pills)
-  }, [pills])
+  }, [pills?.pages.length])
+
+  useEffect(() => {
+    console.log(pillsHours)
+  }, [pillsHours])
 
   function obtenerProximaHoraMasCercana(horasAComparar: string[]) {
     const ahora = new Date()
@@ -102,9 +128,12 @@ export default function Home() {
   }
 
   useEffect(() => {
-    const proximaHora = obtenerProximaHoraMasCercana(pillsHours)
-    setHoraCercana(proximaHora)
-  }, [horaActual])
+    if (pillsHours) {
+      const proximaHora = obtenerProximaHoraMasCercana(pillsHours)
+      console.log(proximaHora)
+      setHoraCercana(proximaHora)
+    }
+  }, [pillsHours])
 
   useEffect(() => {
     if (status === LOADING) {
@@ -153,47 +182,66 @@ export default function Home() {
                   />
                 </div>
               </div>
-              <motion.div className="w-full h-max flex items-center justify-center flex-col mt-8 gap-4">
-                {pills
-                  ?.map((pill, index) => (
-                    <motion.div
-                      initial={{ opacity: 0, y: -60 }}
-                      whileInView={{
-                        opacity: 1,
-                        y: 0,
-                        transition: {
-                          duration: 0.3,
-                          delay: 0.1 * index,
-                          type: "tween",
-                        },
-                      }}
-                      key={index}
-                      className={cn(
-                        "w-[85%] h-[90px] flex items-center justify-between rounded-lg bg-primary_grey transition-colors duration-200",
-                        {
-                          "mb-20": index === 0,
+              <motion.div className="relative w-full h-max flex items-center justify-center flex-col mt-8 gap-4">
+                {pills?.pages.map((page, index) => (
+                  <div
+                    className="w-full h-max flex items-center justify-center flex-col gap-4"
+                    key={index}
+                  >
+                    {page
+                      .map((pill, i) => (
+                        <motion.div
+                          initial={{ opacity: 0, y: -60 }}
+                          whileInView={{
+                            opacity: 1,
+                            y: 0,
+                            transition: {
+                              duration: 0.3,
+                              delay: 0.1 * index,
+                              type: "tween",
+                            },
+                          }}
+                          key={i}
+                          className={cn(
+                            "w-[85%] h-[90px] flex items-center justify-between rounded-lg bg-primary_grey transition-colors duration-200",
+                            {
+                              "bg-primary_blue transition-colors duration-200":
+                                pill.hour === horaCercana,
+                            }
+                          )}
+                        >
+                          <div className="w-full h-full flex items-center justify-center">
+                            <strong className="text-white font-semibold text-6xl ml-2">
+                              {pill.hour}
+                            </strong>
+                          </div>
+                          <div className="w-full h-full flex items-center justify-center flex-col">
+                            <h5 className="font-semibold text-white text-lg">
+                              {pill.name} <br />
+                            </h5>
+                            <small className="text-white font-semibold text-xs">
+                              {actualDay}
+                            </small>
+                          </div>
+                        </motion.div>
+                      ))
+                      .reverse()}
+                  </div>
+                ))}
 
-                          "bg-primary_blue transition-colors duration-200":
-                            pill.hour === horaCercana,
-                        }
-                      )}
-                    >
-                      <div className="w-full h-full flex items-center justify-center">
-                        <strong className="text-white font-semibold text-6xl ml-2">
-                          {pill.hour}
-                        </strong>
-                      </div>
-                      <div className="w-full h-full flex items-center justify-center flex-col">
-                        <h5 className="font-semibold text-white text-lg">
-                          {pill.name} <br />
-                        </h5>
-                        <small className="text-white font-semibold text-xs">
-                          {actualDay}
-                        </small>
-                      </div>
-                    </motion.div>
-                  ))
-                  .reverse()}
+                <div className="w-[85%] h-max flex items-end justify-end mb-20">
+                  <button
+                    onClick={() => fetchNextPage()}
+                    disabled={isFetchingNextPage}
+                    className="text-sm font-semibold text-blue-600 bg-transparent border-none outline-none"
+                  >
+                    {isFetchingNextPage
+                      ? "Cargando..."
+                      : (pills?.pages.length ?? 0) < 3
+                      ? "Ver más..."
+                      : "No hay más pastillas"}
+                  </button>
+                </div>
               </motion.div>
             </div>
           </main>

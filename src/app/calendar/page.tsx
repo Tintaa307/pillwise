@@ -20,14 +20,14 @@ const Calendar = () => {
     isError,
     error,
   } = useQuery({
-    queryKey: ["pills"],
+    queryKey: ["calendarPills"],
     enabled: !!session?.user?.id,
     queryFn: async () => {
       const pills = await getPillsByDate(session?.user?.id!, date)
       return pills as PillsProps[]
     },
     onSuccess: () => {
-      queryClient.invalidateQueries("pills")
+      queryClient.invalidateQueries("calendarPills")
     },
     onError: () => {
       console.log("error")

@@ -192,7 +192,7 @@ const DisplayPills = ({ pills, open, setOpen }: DisplayPillsProps) => {
 
   return (
     <section className="w-full h-[70vh] bg-white flex items-center justify-center">
-      {pills?.length === 0 ? (
+      {pills && pills?.length === 0 ? (
         <>
           {open && <FormPills setOpen={setOpen} />}
           <div
@@ -224,26 +224,35 @@ const DisplayPills = ({ pills, open, setOpen }: DisplayPillsProps) => {
           </header>
           <div className="relative w-[95%] h-[300px] grid grid-cols-6 place-items-center bg-gray-400/20 rounded-sm">
             <div className="w-full h-full flex items-start justify-start absolute flex-col">
-              {pills?.map((pill, index) => (
-                <div
-                  key={index}
-                  onClick={() => {
-                    console.log(pill)
-                  }}
-                  className={cn(
-                    "relative w-3 h-3 bg-[#2A0E8F] rounded-full mt-4"
-                  )}
-                  style={{
-                    left:
-                      pillsHours[index]?.hour >= 21
-                        ? pillsHours[index]?.minutes > 0 ||
-                          pillsHours[index]?.hour > 21
-                          ? `${
-                              oneHourPx * (pillsHours[index]?.hour - 21) -
-                              10 +
-                              (calendarWidth / 6 / 4) *
-                                (pillsHours[index]?.minutes / 60)
-                            }px`
+              {pills &&
+                pills?.map((pill, index) => (
+                  <div
+                    key={index}
+                    onClick={() => {
+                      console.log(pill)
+                    }}
+                    className={cn(
+                      "relative w-3 h-3 bg-[#2A0E8F] rounded-full mt-4"
+                    )}
+                    style={{
+                      left:
+                        pillsHours[index]?.hour >= 21
+                          ? pillsHours[index]?.minutes > 0 ||
+                            pillsHours[index]?.hour > 21
+                            ? `${
+                                oneHourPx * (pillsHours[index]?.hour - 21) -
+                                10 +
+                                (calendarWidth / 6 / 4) *
+                                  (pillsHours[index]?.minutes / 60)
+                              }px`
+                            : `${
+                                (calendarWidth / 6 / 4) *
+                                  pillsHours[index]?.hour +
+                                oneHourPx * 2 -
+                                10 +
+                                (calendarWidth / 6 / 4) *
+                                  (pillsHours[index]?.minutes / 60)
+                              }px`
                           : `${
                               (calendarWidth / 6 / 4) *
                                 pillsHours[index]?.hour +
@@ -251,17 +260,10 @@ const DisplayPills = ({ pills, open, setOpen }: DisplayPillsProps) => {
                               10 +
                               (calendarWidth / 6 / 4) *
                                 (pillsHours[index]?.minutes / 60)
-                            }px`
-                        : `${
-                            (calendarWidth / 6 / 4) * pillsHours[index]?.hour +
-                            oneHourPx * 2 -
-                            10 +
-                            (calendarWidth / 6 / 4) *
-                              (pillsHours[index]?.minutes / 60)
-                          }px`,
-                  }}
-                />
-              ))}
+                            }px`,
+                    }}
+                  />
+                ))}
             </div>
             {arrHours.map((hour, index) => (
               <div
