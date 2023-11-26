@@ -2,7 +2,7 @@
 
 import { Field, Form, Formik } from "formik"
 import { useSession } from "next-auth/react"
-import React, { useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { statusAuth } from "@/objects/status"
 import Loader from "@/components/web/shared/Loader"
 import { EditUserProps } from "@/types/types"
@@ -10,12 +10,17 @@ import toast from "react-hot-toast"
 import { QueryClient, useMutation } from "react-query"
 import { editUser } from "@/lib/controllers/user"
 import { IconUserFilled, IconPencilMinus } from "@tabler/icons-react"
+import Image from "next/image"
+import { cn } from "@/lib/utils"
 
 const Profile = () => {
   const { data: session, status } = useSession()
   const { LOADING } = statusAuth
   const [isEditing, setIsIsEditing] = useState(false)
   const queryClient = new QueryClient()
+  const fileRef = useRef<HTMLInputElement | null>(null)
+  const [file, setFile] = useState<File | null>(null)
+  const [imageUrl, setImageUrl] = useState<string>("")
 
   const updateUserMutation = useMutation({
     mutationKey: ["updateUser"],
@@ -44,6 +49,24 @@ const Profile = () => {
     }
   }
 
+  useEffect(() => {
+    const storedImageUrl = localStorage.getItem("userImage")
+    if (storedImageUrl) {
+      setImageUrl(storedImageUrl)
+    }
+  }, [])
+
+  const handleFileChange = () => {
+    if (fileRef.current && fileRef.current.files) {
+      setFile(fileRef.current.files[0])
+      const objectUrl = URL.createObjectURL(fileRef.current.files[0])
+      setImageUrl(objectUrl)
+
+      // Guardar la imagen en el localStorage
+      localStorage.setItem("userImage", objectUrl)
+    }
+  }
+
   return (
     <>
       {status === LOADING ? (
@@ -52,15 +75,46 @@ const Profile = () => {
         <main className="w-full h-screen bg-primary_blue">
           <div className="w-full h-full flex items-center justify-center flex-col">
             <picture className="w-full h-[35%] flex items-center justify-center">
-              <div className="relative w-48 h-48 rounded-full bg-white border-[2px] border-black">
-                <div className="w-full h-full flex items-center justify-center bg-[#707070]/30 rounded-full">
-                  <span className="text-black/80 text-7xl font-bold">P</span>
+              <div
+                className={cn(
+                  "relative w-48 h-48 bg-white rounded-full border-[2px] border-black",
+                  {
+                    "bg-transparent": imageUrl,
+                  }
+                )}
+              >
+                <div
+                  className={cn(
+                    "w-full h-full flex items-center justify-center bg-[#707070]/30 rounded-full overflow-hidden",
+                    {
+                      "bg-transparent": imageUrl,
+                    }
+                  )}
+                >
+                  {imageUrl ? (
+                    <Image
+                      src={imageUrl}
+                      alt="User image"
+                      width={200}
+                      height={200}
+                      className="object-cover rounded-full"
+                    />
+                  ) : (
+                    <span className="text-black/80 text-7xl font-bold">P</span>
+                  )}
                 </div>
-                <div className="w-10 h-10 bg-white border-2 border-black rounded-full flex items-center justify-center float-right -mt-11">
+                <div className="relative w-10 h-10 bg-white border-2 border-black rounded-full flex items-center justify-center float-right -mt-11 z-20">
                   <IconPencilMinus
+                    onClick={() => fileRef.current?.click()}
                     className={["ri-edit-2-line", "text-black text-2xl"].join(
                       " "
                     )}
+                  />
+                  <input
+                    onChange={handleFileChange}
+                    ref={fileRef}
+                    type="file"
+                    className="hidden"
                   />
                 </div>
               </div>
