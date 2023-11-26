@@ -181,7 +181,7 @@ const DeleteForm = ({ setDeleteFormOpen, pills }: DeleteFormProps) => {
           </div>
           <div
             onClick={() => setDialogOpen(true)}
-            className="w-[80%] h-12 bg-red-600 rounded-sm text-white text-lg font-semibold outline-none flex items-center justify-center mb-12"
+            className="w-[80%] h-14 bg-red-600 rounded-sm text-white text-lg font-semibold outline-none flex items-center justify-center mb-12"
           >
             Eliminar
           </div>
