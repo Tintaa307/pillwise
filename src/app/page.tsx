@@ -33,6 +33,7 @@ export default function Home() {
 
   const fecha = new Date()
   const numeroDiaSemana = fecha.getDay()
+  const minutesOfDate = fecha.getMinutes()
 
   const diasSemana = [
     "Domingo",
@@ -134,7 +135,7 @@ export default function Home() {
       console.log(proximaHora)
       setHoraCercana(proximaHora)
     }
-  }, [pillsHours])
+  }, [pillsHours, minutesOfDate])
 
   useEffect(() => {
     if (status === LOADING) {

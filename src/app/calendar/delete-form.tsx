@@ -85,8 +85,8 @@ const DeleteForm = ({ setDeleteFormOpen, pills }: DeleteFormProps) => {
   return (
     <main className="w-full h-screen absolute top-0 left-0 z-40 bg-black/40 flex items-center justify-center">
       {dialogOpen && <Dialog handleSubmit={handleSubmit} />}
-      <section className="relative w-[95%] h-max flex items-center justify-start flex-col bg-white rounded-sm gap-5">
-        <h1 className="text-black text-2xl font-semibold mt-5">
+      <section className="relative w-[95%] min-h-[350px] flex items-center justify-start flex-col bg-white rounded-sm gap-5">
+        <h1 className="text-black text-2xl font-semibold mt-5 mb-4">
           Elimina tus pastillas
         </h1>
         <div className="absolute top-5 left-4">
@@ -98,9 +98,16 @@ const DeleteForm = ({ setDeleteFormOpen, pills }: DeleteFormProps) => {
         </div>
         <form
           autoComplete="off"
-          className="w-full h-full flex items-center justify-start flex-col gap-5"
+          className="w-full max-h-[550px] flex items-center justify-start flex-col gap-5"
         >
-          <div className="w-full min-h-[200px] flex flex-col items-center justify-center gap-2">
+          <div
+            className={cn(
+              "w-full min-h-[200px] flex flex-col items-center justify-center gap-2",
+              {
+                "overflow-y-auto": pills?.length! > 4,
+              }
+            )}
+          >
             {pills?.map((pill, index) => (
               <div
                 className="w-full flex flex-row gap-2 items-center justify-center"
