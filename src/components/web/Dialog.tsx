@@ -23,7 +23,7 @@ const Dialog = ({ handleSubmit }: DialogProps) => {
         <div className="w-full h-full flex items-end justify-end">
           <button
             onClick={handleSubmit}
-            className="w-[100px] h-10 bg-red-600 rounded-sm text-white text-base font-semibold mr-3 mb-3"
+            className="w-[100px] h-12 bg-red-600 rounded-sm text-white text-base font-semibold mr-3 mb-3"
           >
             Confimar
           </button>
