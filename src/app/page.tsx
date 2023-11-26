@@ -97,7 +97,7 @@ export default function Home() {
       setPillsHour(hour!)
     }
     console.log(pills)
-  }, [pills?.pages.length])
+  }, [pills])
 
   useEffect(() => {
     console.log(pillsHours)

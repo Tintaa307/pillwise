@@ -85,3 +85,10 @@ export interface BluetoothDevice {
   readonly uuids: string[]
   readonly connected: boolean
 }
+
+export interface DeletePill {
+  name: string
+  date: Date
+  hour: string
+  userId: number
+}

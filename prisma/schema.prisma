@@ -9,17 +9,16 @@ datasource db {
 }
 
 model User {
-  id            Int       @id @default(autoincrement())
-  name          String
-  image         String?
-  email         String    @unique
-  emailVerified Boolean   @default(false)
-  password      String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  Account       Account[]
-  Session       Session[]
-  Pastillas     Pills[]
+  id        Int       @id @default(autoincrement())
+  name      String
+  image     String?
+  email     String    @unique
+  password  String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Account   Account[]
+  Session   Session[]
+  Pastillas Pills[]
 }
 
 model Account {

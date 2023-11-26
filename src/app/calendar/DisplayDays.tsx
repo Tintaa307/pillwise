@@ -1,5 +1,6 @@
 import { PillsProps } from "@/types/types"
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
+import DeleteForm from "./delete-form"
 
 type DisplayDaysProps = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
@@ -12,6 +13,7 @@ const DisplayDays = ({ pills, open, setOpen }: DisplayDaysProps) => {
   const actualDay = date.getDate()
   const actualWeekDay = date.getDay()
   const actualMonth = date.getMonth()
+  const [deleteFormOpen, setDeleteFormOpen] = useState(false)
 
   const months = [
     "Enero",
@@ -29,21 +31,20 @@ const DisplayDays = ({ pills, open, setOpen }: DisplayDaysProps) => {
   ]
 
   const weekDays = [
+    "Domingo",
     "Lunes",
     "Martes",
     "Miércoles",
     "Jueves",
     "Viernes",
     "Sábado",
-    "Domingo",
   ]
-
-  useEffect(() => {
-    console.log("Display Days: ", open)
-  }, [open])
 
   return (
     <section className="w-full h-[30vh] bg-primary_blue flex items-center justify-center flex-col">
+      {deleteFormOpen && (
+        <DeleteForm pills={pills} setDeleteFormOpen={setDeleteFormOpen} />
+      )}
       <div className="w-full h-max flex items-center justify-center">
         <h1 className="text-white font-bold text-3xl">Calendario de hoy</h1>
       </div>
@@ -59,7 +60,7 @@ const DisplayDays = ({ pills, open, setOpen }: DisplayDaysProps) => {
             <div className="relative w-full h-full flex items-center justify-center flex-col">
               <div className="m-3">
                 <h3 className="text-white text-xl font-semibold">
-                  {weekDays[actualWeekDay - 1] +
+                  {weekDays[actualWeekDay] +
                     " " +
                     actualDay +
                     " de " +
@@ -78,7 +79,10 @@ const DisplayDays = ({ pills, open, setOpen }: DisplayDaysProps) => {
                 >
                   Agregar
                 </button>
-                <button className="w-[25%] h-9 flex items-center justify-center bg-red-600 rounded-sm text-white text-base font-semibold outline-none">
+                <button
+                  onClick={() => setDeleteFormOpen(true)}
+                  className="w-[25%] h-9 flex items-center justify-center bg-red-600 rounded-sm text-white text-base font-semibold outline-none"
+                >
                   Eliminar
                 </button>
               </div>

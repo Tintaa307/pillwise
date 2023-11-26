@@ -1,4 +1,4 @@
-import { PillsProps } from "@/types/types"
+import { DeletePill, PillsProps } from "@/types/types"
 import axios from "axios"
 
 const pillsAPI = axios.create({
@@ -33,4 +33,8 @@ export const getPillsByDateAndScroll = async (
 
 export const createPill = async (pill: PillsProps) => {
   await pillsAPI.post("/create", pill)
+}
+
+export const deletePill = async (id: number[]) => {
+  await pillsAPI.delete(`/delete/${id}`)
 }

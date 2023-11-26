@@ -218,7 +218,7 @@ const FormPills = ({ setOpen }: PillsStateProps) => {
                   }
                 </button>
               </PopoverTrigger>
-              <PopoverContent className="w-[200px] p-0" align="center">
+              <PopoverContent className="w-[100%] p-0" align="center">
                 <select
                   name="frecuency"
                   value={selectedFrecuency}

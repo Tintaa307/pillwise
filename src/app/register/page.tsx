@@ -11,23 +11,6 @@ import Link from "next/link"
 import { useMutation } from "react-query"
 import { createUser } from "@/lib/controllers/user"
 
-const SignupSchema = z
-  .object({
-    name: z.string().min(4),
-    email: z.string().email(),
-    password: z.string().min(7),
-  })
-  .required()
-  .refine(
-    (data) =>
-      data.name.length === 0 ||
-      data.email.length === 0 ||
-      data.password.length === 0,
-    {
-      message: "You must complete all the fields",
-    }
-  )
-
 const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
@@ -81,7 +64,6 @@ const Register = () => {
       </div>
       <div className="mb-10">
         <Formik
-          validationSchema={SignupSchema}
           onSubmit={(values) => {
             handleSubmit(values)
           }}
