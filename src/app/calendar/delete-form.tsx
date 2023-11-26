@@ -83,7 +83,7 @@ const DeleteForm = ({ setDeleteFormOpen, pills }: DeleteFormProps) => {
   }, [pillsSelected])
 
   return (
-    <main className="w-full h-screen absolute top-0 left-0 z-40 bg-black/40 flex items-center justify-center">
+    <main className="w-full h-screen fixed top-0 left-0 z-40 bg-black/40 flex items-center justify-center">
       {dialogOpen && <Dialog handleSubmit={handleSubmit} />}
       <section className="relative w-[95%] min-h-[350px] flex items-center justify-start flex-col bg-white rounded-sm gap-5">
         <h1 className="text-black text-2xl font-semibold mt-5 mb-4">
