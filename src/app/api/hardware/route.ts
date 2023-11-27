@@ -1,6 +1,5 @@
-import prismadb from "@/lib/db"
-import bcrypt from "bcrypt"
 import { NextResponse } from "next/server"
+import prismadb from "@/lib/db"
 
 export async function POST(req: Request) {
   if (req.method !== "POST") {
@@ -15,7 +14,20 @@ export async function POST(req: Request) {
       throw new Error("Response empty")
     }
 
-    return NextResponse.json({ message: "data recieved", data: response })
+    const { sonar, userId } = response
+
+    if (sonar === "sonar") {
+      await prismadb.user.update({
+        where: {
+          id: userId,
+        },
+        data: {
+          sonar: true,
+        },
+      })
+    }
+
+    return NextResponse.json({ message: "sonar guardado", data: response })
   } catch (error) {
     return NextResponse.json({ message: "error" + error }, { status: 500 })
   }

@@ -16,6 +16,7 @@ model User {
   password  String?
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
+  sound     Boolean   @default(false)
   Account   Account[]
   Session   Session[]
   Pastillas Pills[]

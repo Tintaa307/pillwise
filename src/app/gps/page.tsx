@@ -1,11 +1,60 @@
 "use client"
 
-import React from "react"
+import React, { useEffect } from "react"
 import { IconReload, IconMusic } from "@tabler/icons-react"
 import { MapContainer, TileLayer } from "react-leaflet"
 import "leaflet/dist/leaflet.css"
+import axios from "axios"
+import { useSession } from "next-auth/react"
 
 const Gps = () => {
+  const { data: session } = useSession()
+  const getPosition = (position: any) => {
+    var lat = position.coords.latitude
+    var long = position.coords.longitude
+    console.log(lat, long)
+  }
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(getPosition)
+    } else {
+      console.log("No soporta geolocalizacion")
+    }
+  })
+
+  const handleSubmit = () => {
+    try {
+      axios
+        .post("/api/hardware", {
+          message: "sonar",
+          userId: session?.user?.id,
+        })
+        .then((res) => {
+          console.log(res)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    try {
+      axios
+        .get("/api/sound")
+        .then((res) => {
+          console.log(res)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    } catch (error) {
+      console.log(error)
+    }
+  }, [])
+
   return (
     <>
       <main className="w-full h-screen flex items-center justify-center">
@@ -38,7 +87,10 @@ const Gps = () => {
               </button>
             </div>
             <div>
-              <button className="w-[350px] h-[50px] bg-primary_blue text-white text-lg font-medium rounded-xl flex items-center justify-start">
+              <button
+                onClick={handleSubmit}
+                className="w-[350px] h-[50px] bg-primary_blue text-white text-lg font-medium rounded-xl flex items-center justify-start"
+              >
                 <IconMusic className="absolute mx-4" />
                 <span className="w-full flex items-center justify-center">
                   Sonar
