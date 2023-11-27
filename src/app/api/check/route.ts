@@ -14,15 +14,15 @@ export async function POST(req: Request) {
       throw new Error("Response empty")
     }
 
-    const { message, userId } = response
+    const { message } = response
 
-    if (message === "sonar") {
+    if (message === "recibido") {
       await prismadb.user.update({
         where: {
-          id: userId,
+          id: 1,
         },
         data: {
-          sound: true,
+          sound: false,
         },
       })
     }

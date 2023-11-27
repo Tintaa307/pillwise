@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { IconReload, IconMusic } from "@tabler/icons-react"
 import { MapContainer, TileLayer } from "react-leaflet"
 import "leaflet/dist/leaflet.css"
@@ -9,6 +9,7 @@ import { useSession } from "next-auth/react"
 
 const Gps = () => {
   const { data: session } = useSession()
+  const [sound, setSound] = useState(false)
   const getPosition = (position: any) => {
     var lat = position.coords.latitude
     var long = position.coords.longitude
@@ -31,6 +32,9 @@ const Gps = () => {
         })
         .then((res) => {
           console.log(res)
+          if (res.status === 200) {
+            setSound(true)
+          }
         })
         .catch((err) => {
           console.log(err)
@@ -41,19 +45,21 @@ const Gps = () => {
   }
 
   useEffect(() => {
-    try {
-      axios
-        .get("/api/sound")
-        .then((res) => {
-          console.log(res)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    } catch (error) {
-      console.log(error)
+    if (session?.user.id) {
+      try {
+        axios
+          .get(`/api/sound/${session?.user.id}`)
+          .then((res) => {
+            console.log(res)
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      } catch (error) {
+        console.log(error)
+      }
     }
-  }, [])
+  }, [sound])
 
   return (
     <>

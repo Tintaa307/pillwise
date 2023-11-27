@@ -45,8 +45,11 @@ const DisplayDays = ({ pills, open, setOpen }: DisplayDaysProps) => {
       {deleteFormOpen && (
         <DeleteForm pills={pills} setDeleteFormOpen={setDeleteFormOpen} />
       )}
-      <div className="w-full h-max flex items-center justify-center">
-        <h1 className="text-white font-bold text-3xl">Calendario de hoy</h1>
+      <div className="w-full h-max flex items-start justify-start">
+        <h1 className="text-white font-bold text-3xl ml-3">
+          Calendario <br />
+          de hoy
+        </h1>
       </div>
       <div className="w-full h-max flex items-center justify-center">
         <article className="relative w-full h-max rounded-md flex mt-2">
@@ -57,7 +60,7 @@ const DisplayDays = ({ pills, open, setOpen }: DisplayDaysProps) => {
               </strong>
             </div>
           ) : (
-            <div className="relative w-full h-full flex items-center justify-center flex-col">
+            <div className="relative w-full h-full flex items-start justify-start flex-col">
               <div className="m-3">
                 <h3 className="text-white text-xl font-semibold">
                   {weekDays[actualWeekDay] +
@@ -68,20 +71,20 @@ const DisplayDays = ({ pills, open, setOpen }: DisplayDaysProps) => {
                 </h3>
               </div>
               <div className="mb-3">
-                <small className="text-white font-normal text-sm">
+                <small className="text-white font-normal text-sm ml-3">
                   Pastillas de hoy {`(${pills?.length})`}
                 </small>
               </div>
-              <div className="relative w-full h-max flex items-center justify-center flex-row gap-2 mt-2">
+              <div className="relative w-full h-max flex items-start justify-start flex-row gap-2 mt-2">
                 <button
                   onClick={() => setOpen(true)}
-                  className="w-[25%] h-9 flex items-center justify-center bg-white rounded-sm text-black font-semibold text-base outline-none"
+                  className="w-[25%] h-9 flex items-center justify-center bg-white rounded-sm text-black font-semibold text-base outline-none ml-3"
                 >
                   Agregar
                 </button>
                 <button
                   onClick={() => setDeleteFormOpen(true)}
-                  className="w-[25%] h-9 flex items-center justify-center bg-red-600 rounded-sm text-white text-base font-semibold outline-none"
+                  className="w-[25%] h-9 flex items-center justify-center bg-red-600 rounded-sm text-white text-base font-semibold outline-none ml-3"
                 >
                   Eliminar
                 </button>
