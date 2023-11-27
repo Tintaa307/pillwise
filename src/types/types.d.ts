@@ -92,3 +92,9 @@ export interface DeletePill {
   hour: string
   userId: number
 }
+
+export interface UpdatePillProps {
+  name: string
+  hour: string
+  frequency: string
+}

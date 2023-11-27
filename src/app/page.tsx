@@ -17,6 +17,7 @@ import {
 } from "@/lib/controllers/pills"
 import { QueryClient } from "react-query"
 import { cn } from "@/lib/utils"
+import EditPill from "@/components/web/edit-pill"
 
 export default function Home() {
   const { status, data: session } = useSession()
@@ -30,6 +31,7 @@ export default function Home() {
   const [horaCercana, setHoraCercana] = useState<string | undefined>("")
   const [actualDay, setActualDay] = useState<string>("")
   const pillDivRef = useRef<HTMLDivElement | null>(null)
+  const [pillSelected, setPillSelected] = useState<PillsProps | undefined>()
 
   const fecha = new Date()
   const numeroDiaSemana = fecha.getDay()
@@ -86,6 +88,7 @@ export default function Home() {
   // Obtén la hora actual
   const horaActual = new Date().getHours()
   const [pillsHours, setPillsHour] = useState<string[]>([])
+  const [openPillEditor, setOpenPillEditor] = useState<boolean>(false)
 
   useEffect(() => {
     if (pills) {
@@ -157,6 +160,12 @@ export default function Home() {
           <Loader />
         ) : (
           <main className="w-full h-screen flex items-center justify-center flex-col gap-10">
+            {openPillEditor && pillSelected && (
+              <EditPill
+                {...pillSelected}
+                setOpenPillEditor={setOpenPillEditor}
+              />
+            )}
             <div className="absolute top-5 left-5">
               <IconMenu2
                 onClick={() => setIsOpen(true)}
@@ -200,6 +209,10 @@ export default function Home() {
                   >
                     {page.map((pill, i) => (
                       <motion.div
+                        onClick={() => {
+                          setPillSelected(pill)
+                          setOpenPillEditor(true)
+                        }}
                         initial={{ opacity: 0, y: -60 }}
                         whileInView={{
                           opacity: 1,

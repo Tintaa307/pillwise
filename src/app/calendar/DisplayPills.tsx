@@ -148,7 +148,9 @@ const DisplayPills = ({ pills, open, setOpen }: DisplayPillsProps) => {
           </div>
         </div>
       )}
-      {pillInfoOpen && <PillInfo {...pillInfo!} />}
+      {pillInfoOpen && (
+        <PillInfo {...pillInfo!} setPillInfoOpen={setPillInfoOpen} />
+      )}
     </section>
   )
 }
