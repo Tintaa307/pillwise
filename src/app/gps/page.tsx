@@ -6,22 +6,27 @@ import { MapContainer, TileLayer } from "react-leaflet"
 import "leaflet/dist/leaflet.css"
 import axios from "axios"
 import { useSession } from "next-auth/react"
+import Map from "@/components/web/Map"
 
 const Gps = () => {
   const { data: session } = useSession()
   const [sound, setSound] = useState(false)
-  const getPosition = (position: any) => {
-    var lat = position.coords.latitude
-    var long = position.coords.longitude
-    console.log(lat, long)
-  }
+  const [lat, setLat] = useState<number>(0)
+  const [long, setLong] = useState<number>(0)
+
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(getPosition)
     } else {
-      console.log("No soporta geolocalizacion")
+      const x: HTMLDivElement = document.createElement("div")
+      x.innerHTML = "Geolocation is not supported by this browser."
     }
-  })
+  }, [])
+
+  function getPosition(position: GeolocationPosition) {
+    setLat(position.coords.latitude)
+    setLong(position.coords.longitude)
+  }
 
   const handleSubmit = () => {
     try {
@@ -71,17 +76,7 @@ const Gps = () => {
             </h1>
           </div>
           <section className="relative w-[90%] h-[40%] border-[1.5px] border-black rounded-sm">
-            {/* <MapContainer
-                className="w-full h-full"
-                center={[51.505, -0.09]}
-                zoom={13}
-                scrollWheelZoom={false}
-              >
-                <TileLayer
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-              </MapContainer> */}
+            <Map lat={lat} long={long} />
           </section>
           <div className="w-full h-max flex items-center justify-center flex-col gap-4">
             <div>

@@ -1,6 +1,7 @@
 import { PillsProps } from "@/types/types"
 import React, { useState } from "react"
 import DeleteForm from "./delete-form"
+import { cn } from "@/lib/utils"
 
 type DisplayDaysProps = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
@@ -45,9 +46,17 @@ const DisplayDays = ({ pills, open, setOpen }: DisplayDaysProps) => {
       {deleteFormOpen && (
         <DeleteForm pills={pills} setDeleteFormOpen={setDeleteFormOpen} />
       )}
-      <div className="w-full h-max flex items-start justify-start">
-        <h1 className="text-white font-bold text-3xl ml-3">
-          Calendario <br />
+      <div
+        className={cn("w-full h-max flex items-start justify-start", {
+          "items-center justify-center": pills?.length === 0,
+        })}
+      >
+        <h1
+          className={cn("text-white font-bold text-3xl ml-3", {
+            "ml-0": pills?.length === 0,
+          })}
+        >
+          Calendario {pills?.length !== 0 && <br />}
           de hoy
         </h1>
       </div>

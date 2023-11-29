@@ -98,3 +98,11 @@ export interface UpdatePillProps {
   hour: string
   frequency: string
 }
+
+export interface PillsFilter {
+  name: string
+  recent: boolean
+  old: boolean
+  taken: boolean
+  notTaken: boolean
+}
