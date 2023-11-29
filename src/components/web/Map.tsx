@@ -30,7 +30,7 @@ const Map = ({ lat, long }: { lat: number; long: number }) => {
               shadowSize: [41, 41],
             })
           }
-          position={[lat, long]}
+          position={[-34.549892, -58.453801]}
         >
           <Popup>Acá está tu pastillero.</Popup>
         </Marker>
