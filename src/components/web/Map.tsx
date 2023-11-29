@@ -9,8 +9,8 @@ const Map = ({ lat, long }: { lat: number; long: number }) => {
     <div>
       <MapContainer
         className="w-full h-[40vh]"
-        center={[lat, long]}
-        zoom={20}
+        center={[-34.549892, -58.453801]}
+        zoom={15}
         scrollWheelZoom={false}
       >
         <TileLayer
